@@ -1,6 +1,6 @@
 ### SOLID PRINCIPLES
 
-SOLID is a set of five principles that help in writing maintainable, scalable, and flexible object-oriented code.
+SOLID is a set of five principles that help in writing clean, maintainable, scalable, and flexible object-oriented code.
 
 
 ## S - Single Responsibility Principle (SRP)
