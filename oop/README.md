@@ -193,4 +193,10 @@ public class Main {
 ```
 ✔ The method makeSound() is overridden in Cat class.
 
+## Constructor
+
+- It is a specialised method used for initialising the objects.
+- The name of the class and constructor should be same.
+- The constructor is invoked whenever the object of that associated class is created.
+
 
