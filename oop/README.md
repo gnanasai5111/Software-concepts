@@ -4,10 +4,10 @@ scalable, and maintainable code.
 
 🎯 Key OOP Concepts
 
-1️⃣ Class & Object
-A class is a blueprint for creating objects.
+1️⃣ ## Class & Object
 
-An object is an instance of a class.
+- A class is a blueprint for creating objects.
+- An object is an instance of a class.
 
 ✅ Example: Class & Object in Java
 
