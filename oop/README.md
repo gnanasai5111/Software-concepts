@@ -1,8 +1,8 @@
-### What is OOP?
+# What is OOP?
 Object-Oriented Programming (OOP) is a programming paradigm based on objects that contains data (fields) and methods (behaviour). It helps in creating reusable,
 scalable, and maintainable code.
 
-🎯 Key OOP Concepts
+# 🎯 Key OOP Concepts
 
 ## 1️⃣ Class & Object
 
@@ -138,9 +138,9 @@ public class Main {
 
 Two types:
 
-# Method Overloading (Compile-time Polymorphism)
+### Method Overloading (Compile-time Polymorphism)
 
-# Method Overriding (Runtime Polymorphism)
+### Method Overriding (Runtime Polymorphism)
 
 ✅ Example: Method Overloading (Compile-time Polymorphism)
 
