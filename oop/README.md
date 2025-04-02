@@ -145,7 +145,11 @@ Two types:
 
 ### Method Overloading (Compile-time Polymorphism)
 
+- Same method name with different number of parameters.
+
 ### Method Overriding (Runtime Polymorphism)
+
+- Subclass inherits the methods of parent class and can also provide a new implementation for a method already defined in the parent class.
 
 ✅ Example: Method Overloading (Compile-time Polymorphism)
 
