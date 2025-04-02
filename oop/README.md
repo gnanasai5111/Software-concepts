@@ -32,16 +32,15 @@ public class Main {
 }
 
 ```
-2️⃣ Data Abstraction
-Hides implementation details and shows only the necessary information.
 
-Achieved using abstract classes & interfaces.
+## 2️⃣ Data Abstraction
+
+- Hides implementation details and shows only the necessary information.
+- Achieved using abstract classes & interfaces.
 
 ✅ Example: Abstraction in Java
 
-java
-Copy
-Edit
+```
 abstract class Vehicle {
     abstract void start(); // Method without implementation
 }
@@ -59,18 +58,19 @@ public class Main {
         myCar.start(); // Output: Car engine starting...
     }
 }
+
+```
 ✔ Users only see start() but don’t know how it works internally.
 
-3️⃣ Encapsulation
-Hides data & allows controlled access via methods.
+## 3️⃣ Encapsulation
 
-Prevents direct modification of variables.
+- It means binding of data and methods together in a single entity.
+- Hides data & allows controlled access via methods.
+- Prevents direct modification of variables.
 
 ✅ Example: Encapsulation in Java
 
-java
-Copy
-Edit
+```
 class BankAccount {
     private double balance; // Private variable (hidden data)
 
@@ -94,18 +94,18 @@ public class Main {
         System.out.println("Balance: " + myAccount.getBalance()); // ✅ Output: 1500
     }
 }
+
+```
 ✔ Prevents direct modification of balance.
 
-4️⃣ Inheritance
-Allows a class (child) to reuse properties & methods of another class (parent).
+## 4️⃣ Inheritance
 
-Helps in code reusability.
+- Allows a class (child) to reuse properties & methods of another class (parent).
+- Helps in code reusability.
 
 ✅ Example: Inheritance in Java
 
-java
-Copy
-Edit
+```
 // Parent Class
 class Animal {
     void makeSound() {
@@ -127,22 +127,24 @@ public class Main {
         myDog.makeSound(); // Output: Dog barks
     }
 }
+
+```
+
 ✔ Dog reuses makeSound() from Animal but overrides it.
 
-5️⃣ Polymorphism
-Same method behaves differently for different objects.
+## 5️⃣ Polymorphism
+
+- Same method behaves differently for different objects.
 
 Two types:
 
-Method Overloading (Compile-time Polymorphism)
+# Method Overloading (Compile-time Polymorphism)
 
-Method Overriding (Runtime Polymorphism)
+# Method Overriding (Runtime Polymorphism)
 
 ✅ Example: Method Overloading (Compile-time Polymorphism)
 
-java
-Copy
-Edit
+```
 class MathUtils {
     int add(int a, int b) {
         return a + b;
@@ -160,13 +162,14 @@ public class Main {
         System.out.println(math.add(3.5, 2.5)); // Output: 6.0
     }
 }
+
+```
 ✔ Same method name add() but different parameters.
 
 ✅ Example: Method Overriding (Runtime Polymorphism)
 
-java
-Copy
-Edit
+```
+
 class Animal {
     void makeSound() {
         System.out.println("Animal makes a sound");
@@ -186,6 +189,8 @@ public class Main {
         myAnimal.makeSound(); // Output: Cat meows
     }
 }
+
+```
 ✔ The method makeSound() is overridden in Cat class.
 
-🎯 Key Differences Between OOP C
+
