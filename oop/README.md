@@ -4,17 +4,14 @@ scalable, and maintainable code.
 
 🎯 Key OOP Concepts
 
-1️⃣ ## Class & Object
+## 1️⃣ Class & Object
 
 - A class is a blueprint for creating objects.
 - An object is an instance of a class.
 
 ✅ Example: Class & Object in Java
 
-java
-Copy
-Edit
-// Class (Blueprint)
+```
 class Car {
     String brand;
     int speed;
@@ -33,6 +30,8 @@ public class Main {
         myCar.drive(); // Output: Toyota is driving at 100 km/h
     }
 }
+
+```
 2️⃣ Data Abstraction
 Hides implementation details and shows only the necessary information.
 
