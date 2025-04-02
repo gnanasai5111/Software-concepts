@@ -255,4 +255,9 @@ super() → Calls the parent class constructor and must be the first statement i
 
 ```
 
+## Final
+
+- final class → Cannot be inherited by other classes.
+- final method → Cannot be overridden in subclasses.
+- final variable → Its value cannot be changed after initialization (acts as a constant).
 
