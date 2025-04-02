@@ -199,4 +199,33 @@ public class Main {
 - The name of the class and constructor should be same.
 - The constructor is invoked whenever the object of that associated class is created.
 
+##  this Keyword 
+
+The this keyword refers to the current object of a class. It helps to avoid naming conflicts between instance variables and method parameters.
+
+✅ Example: Using this to differentiate between instance variable and parameter
+
+```
+
+class Person {
+    String name;
+
+    Person(String name) {
+        this.name = name;  // `this.name` refers to instance variable, `name` is parameter
+    }
+
+    void show() {
+        System.out.println("Name: " + this.name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Person("Alice");
+        p.show();  // Output: Name: Alice
+    }
+}
+
+```
+
 
