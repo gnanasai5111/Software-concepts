@@ -201,7 +201,8 @@ public class Main {
 
 ##  this Keyword 
 
-The this keyword refers to the current object of a class. It helps to avoid naming conflicts between instance variables and method parameters.
+- The this keyword refers to the current object of a class.
+- It helps to avoid naming conflicts between instance variables and method parameters.
 
 ✅ Example: Using this to differentiate between instance variable and parameter
 
