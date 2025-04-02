@@ -229,4 +229,13 @@ public class Main {
 
 ```
 
+## Access Modifiers
+
+- They control access to data fields, methods and classes.
+
+- Public    : Allows classes, methods, data fields accessible from any class.
+- Private   : Allows classes, methods, data fields accessible only from within the own class.
+- Default   : Allows classes, methods, data fields accessible by any class in the same package.
+- Protected : Allows classes, methods, data fields accessible by any class and sub class in the same package as well as subclass in other package.
+
 
