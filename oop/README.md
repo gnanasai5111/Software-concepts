@@ -103,6 +103,11 @@ public class Main {
 - Allows a class (child) to reuse properties & methods of another class (parent).
 - Helps in code reusability.
 
+- Single Inheritance : A subclass inherits from one parent class.
+- Multilevel Inheritance : A subclass inherits from another subclass, forming a chain.
+- Hierarchical Inheritance : Multiple subclasses inherit from a single parent class.
+- Multiple Inheritance (via Interfaces) – Sub class inheriting from multiple parents(Java doesn’t support multiple class inheritance). so class implements multiple interfaces.
+
 ✅ Example: Inheritance in Java
 
 ```
