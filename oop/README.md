@@ -134,7 +134,7 @@ public class Main {
 
 ## 5️⃣ Polymorphism
 
-- Same method behaves differently for different objects.
+- Condition of occuring in several different Forms. Same method behaves differently for different objects.
 
 Two types:
 
