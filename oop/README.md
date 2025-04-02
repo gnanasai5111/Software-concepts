@@ -243,4 +243,16 @@ public class Main {
 - Default   : Allows classes, methods, data fields accessible by any class in the same package.
 - Protected : Allows classes, methods, data fields accessible by any class and sub class in the same package as well as subclass in other package.
 
+## Super
+
+- The super keyword in Java is used to refer to the parent class.
+- It helps access parent class variables, methods, and constructors.
+
+```
+super.variable → Accesses a parent class variable if a child class has the same name.
+super.method() → Calls an overridden method from the parent class.
+super() → Calls the parent class constructor and must be the first statement in a child class constructor.
+
+```
+
 
