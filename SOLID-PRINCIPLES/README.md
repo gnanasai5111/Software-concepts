@@ -29,6 +29,6 @@ Don't force classes to implement unnecessary methods. Create smaller, specific i
 
 ## D - Dependency Inversion Principle (DIP)
 
-High-level modules should not depend on low-level modules. Both should depend on abstractions.
+High-level modules should not depend on low-level modules. Both should depend on abstractions.The Dependency inversion principle (DIP) states to depend upon abstractions, [not] concretes
 
 ✅ Example: Instead of hardcoding PayPal in a PaymentService, inject it dynamically via an interface.
