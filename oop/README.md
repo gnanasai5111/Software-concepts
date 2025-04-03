@@ -269,9 +269,9 @@ super() → Calls the parent class constructor and must be the first statement i
 An abstract class is a class that cannot be instantiated (you can't create objects of it). It’s meant to be a base for other classes.
 
 Key Features of Abstract Classes
-✔ Can have both normal methods and abstract methods (methods without a body).
-✔ Can have instance variables (fields).
-✔ Used when you want to provide some common functionality but still enforce certain rules.
+- ✔ Can have both normal methods and abstract methods (methods without a body).
+- ✔ Can have instance variables (fields).
+- ✔ Used when you want to provide some common functionality but still enforce certain rules.
 
 Example of Abstract Class
 
@@ -312,9 +312,9 @@ public class Main {
 An interface is like a contract that classes must follow. It only contains abstract methods (before Java 8).
 
 Key Features of Interfaces
-✔ All methods in an interface are abstract by default (before Java 8).
-✔ Cannot have instance variables (only constants).
-✔ A class can implement multiple interfaces (unlike abstract classes, which support only single inheritance).
+- ✔ All methods in an interface are abstract by default (before Java 8).
+- ✔ Cannot have instance variables (only constants).
+- ✔ A class can implement multiple interfaces (unlike abstract classes, which support only single inheritance).
 
 Example of Interface
 
