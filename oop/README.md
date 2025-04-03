@@ -265,3 +265,81 @@ super() → Calls the parent class constructor and must be the first statement i
 - final method → Cannot be overridden in subclasses.
 - final variable → Its value cannot be changed after initialization (acts as a constant).
 
+## Abstract Class
+An abstract class is a class that cannot be instantiated (you can't create objects of it). It’s meant to be a base for other classes.
+
+Key Features of Abstract Classes
+✔ Can have both normal methods and abstract methods (methods without a body).
+✔ Can have instance variables (fields).
+✔ Used when you want to provide some common functionality but still enforce certain rules.
+
+Example of Abstract Class
+
+```
+abstract class Animal {  
+    String name; // Instance variable
+
+    void eat() {  // Concrete method
+        System.out.println("Eating...");
+    }
+
+    abstract void makeSound(); // Abstract method (must be implemented by subclasses)
+}
+
+class Dog extends Animal {  
+    @Override
+    void makeSound() {  
+        System.out.println("Woof! Woof!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Animal a = new Animal(); ❌ ERROR! Can't create an abstract class object.
+        Dog d = new Dog();
+        d.eat();  // ✅ Common method from Animal
+        d.makeSound();  // ✅ Dog’s version of makeSound()
+    }
+}
+
+```
+
+## When to Use Abstract Classes?
+- When you want to partially implement functionality but force subclasses to implement specific methods.
+- When you need instance variables (fields).
+
+## Interface
+An interface is like a contract that classes must follow. It only contains abstract methods (before Java 8).
+
+Key Features of Interfaces
+✔ All methods in an interface are abstract by default (before Java 8).
+✔ Cannot have instance variables (only constants).
+✔ A class can implement multiple interfaces (unlike abstract classes, which support only single inheritance).
+
+Example of Interface
+
+```
+interface Animal {  
+    void makeSound(); // No need for 'abstract', it's implicit
+}
+
+class Dog implements Animal {  
+    @Override
+    public void makeSound() {  
+        System.out.println("Woof! Woof!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.makeSound();  // ✅ Dog’s version of makeSound()
+    }
+}
+
+```
+
+## When to Use Interfaces?
+- When you want full abstraction (no method implementations).
+- When you need multiple inheritance (since Java does not allow multiple inheritance with classes).
+
