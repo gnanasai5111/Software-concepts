@@ -344,6 +344,9 @@ public class Main {
 - When you need multiple inheritance (since Java does not allow multiple inheritance with classes).
 - use implements keyword to implement interface and extend keyword to extend classes
 
+
+### Extends and Implements keyword
+
 ```
 
 abstract class Animal {
