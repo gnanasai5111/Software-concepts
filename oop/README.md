@@ -342,4 +342,40 @@ public class Main {
 ## When to Use Interfaces?
 - When you want full abstraction (no method implementations).
 - When you need multiple inheritance (since Java does not allow multiple inheritance with classes).
+- use implements keyword to implement interface and extend keyword to extend classes
+
+```
+
+abstract class Animal {
+    abstract void makeSound();
+}
+
+interface Pet {
+    void play();
+}
+
+class Dog extends Animal implements Pet {  // Extends a class and implements an interface
+    @Override
+    void makeSound() {
+        System.out.println("Woof!");
+    }
+
+    @Override
+    public void play() {
+        System.out.println("Dog is playing!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.makeSound();  // From Animal
+        d.play();  // From Pet
+    }
+}
+
+```
+
+- A class can extend only one class (Java does not support multiple inheritance for classes).
+- A class can implement multiple interfaces (solves multiple inheritance problem).
 
