@@ -382,3 +382,87 @@ public class Main {
 - A class can extend only one class (Java does not support multiple inheritance for classes).
 - A class can implement multiple interfaces (solves multiple inheritance problem).
 
+
+## Static 
+
+- Belongs to the class, not to instances (objects).
+- Shared across all objects of the class.
+- Can be accessed without creating an object of the class.
+- Think of static as something "global" to the class.
+
+### Static Variables (static Fields)
+A static variable is shared among all instances of a class.
+
+```
+
+class Example {
+    static int count = 0; // Shared variable
+
+    Example() {
+        count++;
+    }
+
+    void showCount() {
+        System.out.println("Count: " + count);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Example e1 = new Example();
+        Example e2 = new Example();
+        
+        e1.showCount();  // Output: Count: 2
+        e2.showCount();  // Output: Count: 2
+    }
+}
+
+```
+✅ Why use static variables?
+- If we didn't use static, each object would have its own count variable instead of sharing one.
+
+### Static Methods (static Functions)
+- Can be called without creating an object.
+- Cannot access non-static (instance) variables directly.
+
+```
+
+class MathUtils {
+    static int square(int x) { // Static method
+        return x * x;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int result = MathUtils.square(5); // No need to create an object
+        System.out.println("Square: " + result); // Output: 25
+    }
+}
+
+```
+✅ Why use static methods?
+- If a method doesn’t need instance variables, make it static.
+
+### Static Classes (Nested Static Classes)
+A static class is a nested class inside another class that does not depend on the outer class instance.
+
+```
+class Outer {
+    static class Inner {  // Static nested class
+        void show() {
+            System.out.println("Inside Static Inner Class");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Outer.Inner obj = new Outer.Inner(); // No need for Outer class instance
+        obj.show();
+    }
+}
+
+```
+✅ Why use static classes?
+- If the inner class does not need access to the outer class’s variables.
