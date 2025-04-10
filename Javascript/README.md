@@ -46,3 +46,13 @@ Hoisting is JavaScript's default behavior of moving declarations to the top of t
 - Undefined means variable exists in memory, but has no value yet. Accessing it gives undefined.
 - Not defined means variable has never been declared. Accessing it gives Reference error as variable doesnt exist in memory.
 
+## this keyword
+
+- this keyword refers to an object.
+- Alone, this refers to the global object.
+- In an object method, this refers to the object.
+- In a function, this refers to the global object. In strict Mode , this refers to undefined.
+- Arrow functions do NOT have their own this. They inherit it from the surrounding (lexical) scope.
+- In an event, this refers to the element that received the event.
+- Methods like call(), apply(), and bind() can refer this to any object.
+
