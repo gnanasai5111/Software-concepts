@@ -41,3 +41,8 @@ Hoisting is JavaScript's default behavior of moving declarations to the top of t
 - let and const are hoisted  but not initialised. They are in temporal deadzone untill they are defined. Accessing them before that causes a ReferenceError
 - Function Declarations (like function foo() {}) are hoisted. For Function Expressions (like const foo = function () {} or arrow functions), only variables are hoisted
 
+## Undefined vs Not Defined
+
+- Undefined means variable exists in memory, but has no value yet
+- Not defined means variable has never been declared
+
