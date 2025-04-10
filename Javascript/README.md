@@ -33,3 +33,11 @@
 - When a function is called, a new Execution Context is pushed onto the stack.
 - When the function returns, its context is popped off.
 
+## Hoisting 
+
+Hoisting is JavaScript's default behavior of moving declarations to the top of the current execution context (memory phase) before the code is executed.
+
+- var is hoisted and initialized as undefined. You can access it before its declaration, but the value will be undefined 
+- let and const are hoisted  but not initialised. They are in temporal deadzone untill they are defined. Accessing them before that causes a ReferenceError
+- Function Declarations (like function foo() {}) are hoisted. For Function Expressions (like const foo = function () {} or arrow functions), only variables are hoisted
+
