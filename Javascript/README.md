@@ -43,6 +43,6 @@ Hoisting is JavaScript's default behavior of moving declarations to the top of t
 
 ## Undefined vs Not Defined
 
-- Undefined means variable exists in memory, but has no value yet
-- Not defined means variable has never been declared
+- Undefined means variable exists in memory, but has no value yet. Accessing it gives undefined.
+- Not defined means variable has never been declared. Accessing it gives Reference error as variable doesnt exist in memory.
 
