@@ -233,6 +233,43 @@ setTimeout(()=>{
 },(2000));
 
 ```
+
+## Array Methods
+
+- **map** : Transforms each element in an array and returns a new array with the modified values.
+- **filter** : Returns a new array with elements that pass a specified condition (test).
+- **reduce** : Reduces the array to a single value by applying an operation  across elements.
+- **every** : Returns true if all elements pass the given condition; otherwise, returns false.
+- **some** : Returns true if at least one element passes the condition; otherwise, returns false.
+
+```
+
+// map()
+const nums = [1, 2, 3];
+const doubled = nums.map(n => n * 2); 
+console.log(doubled); // [2, 4, 6]
+
+// filter()
+const numbers = [1, 2, 3, 4];
+const even = numbers.filter(n => n % 2 === 0); 
+console.log(even); // [2, 4]
+
+// reduce()
+const arr = [1, 2, 3, 4];
+const sum = arr.reduce((acc, curr) => acc + curr, 0); 
+console.log(sum); // 10
+
+// every()
+const list = [2, 4, 6];
+const allEven = list.every(n => n % 2 === 0); 
+console.log(allEven); // true
+
+// some()
+const mixed = [1, 3, 4];
+const hasEven = mixed.some(n => n % 2 === 0); 
+console.log(hasEven); // true
+
+```
   
 
 
