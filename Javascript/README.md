@@ -56,3 +56,26 @@ Hoisting is JavaScript's default behavior of moving declarations to the top of t
 - In an event, this refers to the element that received the event.
 - Methods like call(), apply(), and bind() can refer this to any object.
 
+## Scope
+
+- Scope determines accessibility of variables in different parts of the code.
+- **Global Scope** : Variables declared outside any function/block. Accessible everywhere.
+- **Function Scope** : Variables declared inside a function. Accessible only within that function.
+- **Block Scope** : Introduced with let and const. Variables inside {} (if/else, loops, etc.) are accessible only inside that block.
+
+## Scope Chain 
+
+- When accessing a variable, JavaScript searches in the current scope.
+- If not found, moves upward to the parent scope.
+- Continues until it reaches the global scope.
+- This chain of scopes is called the Scope Chain.
+
+## Lexical Environment
+
+- A lexical environment in JavaScript is a data structure that stores variables and functions defined in the current scope, along with references to all outer scopes. It is also known as the lexical scope.
+- The lexical environment is created when a function is defined and persists as long as the function or any of its closures remain accessible.
+
+
+
+
+
