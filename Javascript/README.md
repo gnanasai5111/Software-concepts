@@ -116,6 +116,10 @@ try {
 
 ```
 
+## Shadowing 
+
+- Shadowing happens when a variable in a local scope (block/function) has the same name as a variable in an outer scope. The inner variable "shadows" or overrides access to the outer one within its scope.
+
 
 
 
