@@ -75,6 +75,45 @@ Hoisting is JavaScript's default behavior of moving declarations to the top of t
 - A lexical environment in JavaScript is a data structure that stores variables and functions defined in the current scope, along with references to all outer scopes. It is also known as the lexical scope.
 - The lexical environment is created when a function is defined and persists as long as the function or any of its closures remain accessible.
 
+## var, let, const
+
+- **var** - Function Scope. They can be redeclared and reassigned.  Hoisted and initialized as undefined
+- **let** - Block Scope. They can not be redeclared but can be reassigned. Hoisted, but exists in the Temporal Dead Zone (TDZ) until initialized.
+- **const** - Block Scope. They can not be redeclared and cannot be reassigned. Hoisted, but exists in the Temporal Dead Zone (TDZ) until initialized.
+
+## Error Types
+
+```
+- Syntax Error happens when you break js grammar rules.
+- Type Error happens when an operation is performed on a value of the wrong type.
+- Reference Error happens when trying to access a variable that doesn’t exist in the scope.
+
+// 🧨 1. SyntaxError Example
+// This will throw a SyntaxError because of the missing closing bracket
+try {
+  eval("let a = 10 console.log(a"); 
+} catch (e) {
+  console.error("SyntaxError:", e.message);
+}
+
+// 🧨 2. TypeError Example
+// Trying to call a number like a function will throw a TypeError
+try {
+  let num = 5;
+  num(); // num is not a function
+} catch (e) {
+  console.error("TypeError:", e.message);
+}
+
+// 🧨 3. ReferenceError Example
+// Accessing an undeclared variable throws a ReferenceError
+try {
+  console.log(notDeclaredVar);
+} catch (e) {
+  console.error("ReferenceError:", e.message);
+}
+
+```
 
 
 
