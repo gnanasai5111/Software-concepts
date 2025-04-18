@@ -83,10 +83,11 @@ Hoisting is JavaScript's default behavior of moving declarations to the top of t
 
 ## Error Types
 
-```
 - Syntax Error happens when you break js grammar rules.
 - Type Error happens when an operation is performed on a value of the wrong type.
 - Reference Error happens when trying to access a variable that doesn’t exist in the scope.
+
+```
 
 // 🧨 1. SyntaxError Example
 // This will throw a SyntaxError because of the missing closing bracket
