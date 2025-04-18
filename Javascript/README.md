@@ -225,6 +225,7 @@ console.log(applyOperation(square, 4));  // Outputs: 16
 ### Callback functions
 
 - A function that is passed as an argument to another function, and is called later inside that function.
+- Callbacks are used to perform asynchronous operations
 
 ```
 setTimeout(()=>{
