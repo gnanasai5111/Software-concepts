@@ -241,6 +241,9 @@ setTimeout(()=>{
 - **reduce** : Reduces the array to a single value by applying an operation  across elements.
 - **every** : Returns true if all elements pass the given condition; otherwise, returns false.
 - **some** : Returns true if at least one element passes the condition; otherwise, returns false.
+- **find** : Returns the first element that satisfies the condition, or undefined if none do.
+- **findIndex** - Returns the index of the matching element instead of the element itself.
+- **flatMap** - returns a new array formed by applying a given callback function to each element of the array, and then flattening the result by one level.
 
 ```
 
@@ -268,6 +271,23 @@ console.log(allEven); // true
 const mixed = [1, 3, 4];
 const hasEven = mixed.some(n => n % 2 === 0); 
 console.log(hasEven); // true
+
+// find()
+
+const arr = [5, 10, 15];
+const found = arr.find(n => n > 7); // 10
+
+// findIndex()
+
+const arr = [10, 20, 30];
+const index = arr.findIndex(n => n === 20); // 1
+
+// flatMap()
+
+const arr1 = [1, 2, 1];
+
+const result = arr1.flatMap((num) => (num === 2 ? [2, 2] : 1)); //  [1, 2, 2, 1]
+
 
 ```
   
