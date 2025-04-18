@@ -138,6 +138,91 @@ init();
 
 ```
 
+## Functions
+
+### Function Statement or Function Declaration
+
+```
+function fn(){
+}
+```
+
+### Function Expression
+ 
+```
+let fn=function(){
+}
+```
+
+### Named Function Expression
+
+```
+let fn=function name(){
+}
+```
+
+### Parameters and Arguments
+
+```
+function sum(a,b){  - Parameters
+}
+sum(2,3); - Arguments(Actual values)
+```
+
+### Anonymous Functions
+- function without a name
+
+```
+function(){
+}
+```
+
+### Arrow Functions
+- Shorter syntax
+
+```
+var a =()=>{
+}
+```
+
+### First class Functions
+
+- The ability to use functions as values(first class citizens). We can assign a function to a variable, pass function as an argument and also can return an function.
+
+```
+
+let greet = function(name) {
+  return `Hello, ${name}!`;
+};
+
+function callFunction(fn, name) {
+  return fn(name);
+}
+
+console.log(callFunction(greet, 'Alice'));  // Outputs: Hello, Alice!
+
+```
+
+### Higher Order Functions
+
+- It is a function that either takes one or more functions as arguments and returns a function as a result.
+
+```
+
+// Higher-order function that takes a function as an argument
+function applyOperation(fn, num) {
+  return fn(num);
+}
+
+let square = function(x) {
+  return x * x;
+};
+
+console.log(applyOperation(square, 4));  // Outputs: 16
+
+```
+  
+
 
 
 
