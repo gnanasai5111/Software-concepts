@@ -120,6 +120,24 @@ try {
 
 - Shadowing happens when a variable in a local scope (block/function) has the same name as a variable in an outer scope. The inner variable "shadows" or overrides access to the outer one within its scope.
 
+## Closures
+
+- A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).In other words, a closure gives a function access to its outer scope.
+
+```
+
+function init() {
+  var name = "Mozilla"; // name is a local variable created by init
+  function displayName() {
+    // displayName() is the inner function, that forms a closure
+    console.log(name); // use variable declared in the parent function
+  }
+  displayName();
+}
+init();
+
+```
+
 
 
 
