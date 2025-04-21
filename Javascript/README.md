@@ -487,3 +487,27 @@ Promise.any([p1, p2])
 
 ```
 
+## Async/Await
+
+- async/await is syntactic sugar over Promises that makes asynchronous code look and behave like synchronous code.
+- Async is a keyword that is used before function.
+- Async function always returns an Promise.
+- Await can only be used inside an async function
+- Await pauses execution until the Promise settles (fulfilled or rejected) and returns the resolved value or throws if rejected
+
+```
+
+async function riskyOperation() {
+  try {
+    const data = await someFailingPromise();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error caught:", error.message);
+    return err;
+  }
+}
+riskyOperation().then((data)=>{}).catch((err)=>{})
+
+```
+
