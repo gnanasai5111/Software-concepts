@@ -290,8 +290,46 @@ const result = arr1.flatMap((num) => (num === 2 ? [2, 2] : 1)); //  [1, 2, 2, 1]
 
 
 ```
-  
 
+## Javascript Runtime environment
 
+- A JavaScript runtime environment is the platform that provides the necessary tools and libraries to execute JavaScript code.
+- It includes JS Engine, Call Stack,Event Loop,Callback Queue (Macrotask Queue),Microtask Queue,Memory heap, Web apis and storage apis.
 
+### JavaScript Engine Architecture (e.g., V8)
+
+- It Parses, compiles, and executes JS code.
+- Parser: Converts code to AST (Abstract Syntax Tree).
+- Interpreter :  It translates the source code into machine code line-by-line.
+- Compiler : It translates the entire source code of a program into machine code.
+- JIT (Just in time compilation) -  JIT is a hybrid approach that combines both compilation and interpretation. It compiles code just before or while the program is running, rather than ahead of time.  The JavaScript engine first interprets the code to start execution quickly. As the program runs, it identifies frequently executed parts of the code (called "hot spots") and compiles them into optimized machine code. This compiled code can then be reused, making future executions of those parts faster.
+- Profiler: Detects which parts of code are used often.
+
+### Memory Heap
+
+- The area where objects and functions are stored dynamically. JS allocates memory here during execution.
+
+### Garbage Collector
+
+- Automatically frees memory no longer used. Most JS engines use the Mark-and-Sweep algorithm.
+
+### Mark-and-Sweep Algorithm
+
+- Mark: Start from root and mark all reachable memory.
+- Sweep: Clean up all unmarked (unreachable) memory.
+
+### Event Loop
+
+- JavaScript operates in a single-threaded environment, meaning only one piece of code runs at a time. The event loop ensures that tasks are executed in the correct order, enabling asynchronous programming and keeping the main thread non-blocking.
+- It monitors the Call Stack, Microtask Queue, and Callback (Macrotask) Queue.
+
+**Workflow** :
+- Executes all synchrounous code (Call Stack).
+- Executes all tasks from the Microtask Queue(higher priority).
+- Executes one task at a time from the Callback (Macrotask) Queue per cycle
+
+### Microtask and callback Queue
+
+- Microtask queue stores higher priority tasks like Promises, mutation observer
+- Callback queue stores tasks like setTimeout, Dom apis.
 
