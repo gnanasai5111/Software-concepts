@@ -333,3 +333,157 @@ const result = arr1.flatMap((num) => (num === 2 ? [2, 2] : 1)); //  [1, 2, 2, 1]
 - Microtask queue stores higher priority tasks like Promises, mutation observer
 - Callback queue stores tasks like setTimeout, Dom apis.
 
+## Callbacks
+
+- Callback: A function that is passed as an argument to another function, and is called later inside that function.
+- Callback Hell:	Deep nesting of callbacks that leads to unreadable, unmaintainable and error prone code.
+- Inversion of Control:	Loss of control when you hand over your function to someone else's function.
+
+## Promises
+- A Promise is an object that represents the eventual completion (or failure) of an asynchronous operation.
+
+**States of a Promise**
+- Pending
+- Fulfilled
+- Rejected
+
+```
+
+const promise = new Promise((resolve, reject) => {
+  if (/* success */) {
+    resolve(result);
+  } else {
+    reject(error);
+  }
+});
+
+promise
+  .then((result) => {
+    // success
+  })
+  .catch((error) => {
+    // error
+  })
+  .finally(() => {
+    // always runs
+  });
+
+```
+
+- Promise.resolve() creates a resolved (fulfilled) promise, meaning it’s already in the fulfilled state and its value is passed directly.
+- Promise.reject() creates a rejected promise, meaning it’s already in the rejected state and its reason (error) is provided directly.
+
+```
+
+const resolvedPromise = Promise.resolve("Task completed");
+
+resolvedPromise.then((value) => {
+  console.log(value); // "Task completed"
+});
+
+const rejectedPromise = Promise.reject("Something went wrong");
+
+rejectedPromise.catch((error) => {
+  console.log(error); // "Something went wrong"
+});
+
+```
+
+## Promise.all()
+
+- Waits for all promises to resolve. Returns an array of resolved values in order of the input promises. If any promise rejects, the entire operation fails and goes to .catch()
+
+## Promise.allSettled()
+
+- Waits for all promises to settle (either resolve or reject). Never fails early.Returns an array of objects with status and values.
+
+## Promise.race()
+
+- Settles as soon as the first promise settles (fulfilled or rejected).Returns the value or error from that first settled promise.
+
+## Promise.any()
+
+- Returns the first fulfilled promise.Ignores rejected promises.If all promises reject, it throws an AggregateError.
+
+```
+
+1. Promise.all()
+
+const p1 = Promise.resolve(1);
+const p2 = Promise.resolve(2);
+const p3 = Promise.resolve(3);
+
+Promise.all([p1, p2, p3])
+  .then((values) => console.log("All resolved:", values)) // [1, 2, 3]
+  .catch((err) => console.error("Error:", err));
+
+With one rejection:
+
+const p1 = Promise.resolve(1);
+const p2 = Promise.reject("Failed!");
+const p3 = Promise.resolve(3);
+
+Promise.all([p1, p2, p3])
+  .then((values) => console.log(values))
+  .catch((err) => console.error("Error:", err)); // Error: Failed!
+
+
+2. Promise.allSettled()
+
+const p1 = Promise.resolve("Success");
+const p2 = Promise.reject("Oops");
+const p3 = Promise.resolve("Done");
+
+Promise.allSettled([p1, p2, p3])
+  .then((results) => console.log(results));
+
+Output:
+
+[
+  { status: 'fulfilled', value: 'Success' },
+  { status: 'rejected', reason: 'Oops' },
+  { status: 'fulfilled', value: 'Done' }
+]
+
+3. Promise.race()
+
+const p1 = new Promise((res) => setTimeout(() => res("First"), 100));
+const p2 = new Promise((res) => setTimeout(() => res("Second"), 200));
+
+Promise.race([p1, p2])
+  .then((value) => console.log("Winner:", value)); // Winner: First
+
+With one rejecting first:
+
+const p1 = new Promise((_, rej) => setTimeout(() => rej("Failed early"), 50));
+const p2 = new Promise((res) => setTimeout(() => res("Slow success"), 100));
+
+Promise.race([p1, p2])
+  .then((val) => console.log(val))
+  .catch((err) => console.error("Error:", err)); // Error: Failed early
+
+4. Promise.any()
+
+const p1 = Promise.reject("Error 1");
+const p2 = Promise.resolve("Success");
+const p3 = Promise.resolve("Another Success");
+
+Promise.any([p1, p2, p3])
+  .then((result) => console.log("First fulfilled:", result)) // First fulfilled: Success
+  .catch((err) => console.error("All failed:", err));
+
+With all rejected:
+
+const p1 = Promise.reject("Error 1");
+const p2 = Promise.reject("Error 2");
+
+Promise.any([p1, p2])
+  .then((val) => console.log(val))
+  .catch((err) => {
+    console.error("All promises failed");
+    console.error(err.errors); // ["Error 1", "Error 2"]
+  });
+
+
+```
+
