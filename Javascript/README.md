@@ -534,3 +534,113 @@ sayHi(); // Hey, John
 
 ```
 
+## Polyfill for bind,call,apply 
+
+- Polyfill is browser fallback. It means we write own implementation for that
+
+**Bind Polyfill**
+
+```
+
+const obj={
+firstName:"Gnana",
+lastName:"sai"
+}
+
+const getName=function(city,age){
+
+console.log(this.firstName+" "+this.lastName+" from "+ city +" of age "+age)
+}
+
+
+let fn=getName.bind(obj,"hyderabad");
+fn(26)
+
+Function.prototype.myBind=function(...args){
+let fn=this;
+let params=args.slice(1)
+return function(...args2){
+fn.apply(args[0],[...params,...args2])
+}
+}
+
+let fn2=getName.myBind(obj,"hyderbad")
+fn2(26)
+
+```
+**Polyfill for bind without call and apply**
+
+```
+
+const obj={
+firstName:"Gnana",
+lastName:"sai"
+}
+
+const getName=function(city,age){
+
+console.log(this.firstName+" "+this.lastName+" from "+ city +" of age "+age)
+}
+
+
+let fn=getName.bind(obj,"hyderabad");
+fn(26)
+
+Function.prototype.myBind=function(...args){
+let fn=this;
+let params=args.slice(1)
+let obj=args[0];
+console.log(fn,args[0])
+return function(...args2){
+obj.fns=fn;
+obj.fns(...[...params,...args2])
+}
+}
+
+let fn2=getName.myBind(obj,"hyderbad")
+fn2(26)
+
+```
+
+**Apply Polyfill**
+
+```
+
+const obj ={
+name:"gnanasai",
+city:"hyderabad"}
+
+function sayIntro (company,place){
+console.log(`name is ${this.name}, place is ${this.city} and company is ${company} and work place is ${place} `)
+}
+
+Function.prototype.myApply= function (context,args){
+context.fnc = this;
+context.fnc(...args);
+}
+sayIntro.myApply(obj,["safearth","banglore"])
+
+```
+
+**Call Polyfill**
+
+```
+
+const obj ={
+name:"gnanasai",
+city:"hyderabad"}
+
+function sayIntro (company,place){
+console.log(`name is ${this.name}, place is ${this.city} and company is ${company} and work place is ${place} `)
+}
+
+Function.prototype.myCall= function (context,...args){
+context.fnc = this;
+context.fnc(...args);
+}
+sayIntro.myCall(obj,"safearth","banglore")
+
+```
+
+
+
