@@ -744,7 +744,8 @@ Now, imagine that this prototype object itself might have its own prototype! Thi
 Prototypal inheritance is the mechanism in JavaScript that allows objects to inherit properties and methods from their prototypes. Instead of having classes like in some other programming languages, JavaScript uses this prototype chain to achieve inheritance. Objects inherit directly from other objects via these prototype links. This means you can create new objects based on existing ones, inheriting their functionality and then extending or modifying it for the new object.
 
 ```
-
+- __proto__ is a reference to the object's parent prototype.
+-  prototype is a property that only functions have.(Array,Object,Function are constructor functions)
 let arr=[1,2,4]
 
 arr.__proto__ : Array.prototype
