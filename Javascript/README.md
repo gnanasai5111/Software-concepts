@@ -511,3 +511,26 @@ riskyOperation().then((data)=>{}).catch((err)=>{})
 
 ```
 
+## Call, Apply , Bind
+
+- They are used to change the value of this inside a function
+  
+- **call** -  Calls the function right away with a given this and arguments one by one.
+- **apply** - Works just like call() but takes arguments in an array.
+- **bind** - Doesn't call the function immediately, it returns a new function and you can call it later.
+
+```
+
+function greet(msg) {
+  console.log(msg + ", " + this.name);
+}
+
+const user = { name: "John" };
+greet.call(user, "Hello"); // Hello, John
+greet.apply(user, ["Hi"]); // Hi, John
+const sayHi = greet.bind(user, "Hey");
+sayHi(); // Hey, John
+
+
+```
+
