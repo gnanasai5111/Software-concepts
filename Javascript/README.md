@@ -642,5 +642,60 @@ sayIntro.myCall(obj,"safearth","banglore")
 
 ```
 
+## Spread and Rest
+
+- **Spread** - Used to spread elements from an array or object.
+- **Rest** - Collects things together
+
+```
+// Spread
+
+// In arrays
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5];
+
+console.log(arr2);
+
+// In objects
+const person = { name: "Gnana", age: 25 };
+const updatedPerson = { ...person, city: "Hyderabad" };
+
+console.log(updatedPerson); 
+// { name: "Gnana", age: 25, city: "Hyderabad" }
+
+// In Functions
+
+const nums = [1, 2, 3];
+console.log(Math.max(...nums)); // 3 (equivalent to Math.max(1, 2, 3))
+
+// Rest
+
+// In Arrays
+
+const arr = [1, 2, 3, 4];
+const [first, second, ...rest] = arr;
+
+console.log(first);  // 1
+console.log(second); // 2
+console.log(rest);   // [3, 4]
+
+// In Objects
+
+const user = { name: "Gnana", age: 25, city: "Hyderabad" };
+const { name, ...rest } = user;
+
+console.log(name);   // "Gnana"
+console.log(rest);   // { age: 25, city: "Hyderabad" }
+
+// In Functions
+
+function sum(...numbers) {
+  return numbers.reduce((a, b) => a + b, 0);
+}
+
+console.log(sum(1, 2, 3, 4)); // 10
+
+```
+
 
 
