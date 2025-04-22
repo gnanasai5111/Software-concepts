@@ -730,3 +730,38 @@ console.log(addTwo(4));
 
 
 
+
+## Prototype:
+
+When you create an object in JavaScript, it automatically gets a hidden link to another object called its prototype. This prototype object contains properties and methods that the original object can access and use.
+
+## Prototype Chain:
+
+Now, imagine that this prototype object itself might have its own prototype! This creates a chain of prototypes. When you try to access a property or method on an object, JavaScript first looks directly in that object. If it doesn't find it there, it goes up the prototype chain to the object's prototype, and then to that prototype's prototype, and so on, until it either finds the property/method or reaches the end of the chain (which is usually null).
+
+## Prototypal Inheritance:
+
+Prototypal inheritance is the mechanism in JavaScript that allows objects to inherit properties and methods from their prototypes. Instead of having classes like in some other programming languages, JavaScript uses this prototype chain to achieve inheritance. Objects inherit directly from other objects via these prototype links. This means you can create new objects based on existing ones, inheriting their functionality and then extending or modifying it for the new object.
+
+```
+
+let arr=[1,2,4]
+
+arr.__proto__ : Array.prototype
+arr.__proto__.__proto__ : Object.prototype
+arr.__proto__.__proto__.__proto__ : null
+
+let obj={name:"gnanasai"}
+
+obj.__proto__ : Object.prototype
+obj.__proto__.__proto__ : null
+
+let fn=function(){}
+
+fn.__proto__ : Function.prototype
+fn.__proto__.__proto__ : Object.prototype
+fn.__proto__.__proto__.__proto__ : null
+
+```
+
+
