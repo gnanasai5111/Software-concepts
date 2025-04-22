@@ -697,5 +697,36 @@ console.log(sum(1, 2, 3, 4)); // 10
 
 ```
 
+// Function Currying
+
+- It converts a function with multiple parameters into a sequence of functions.
+- Each function takes a single argument and returns another function until all arguments are received.
+
+```
+
+// Normal Function
+// function add(a, b) {
+//     return a + b;
+// }
+// console.log(add(2, 3)); 
+
+// Function Currying
+function add(a) {
+    return function(b) {
+        return a + b;
+    }
+}
+
+const addTwo = add(5);  // First function call with 5
+console.log(addTwo(4));
+
+```
+
+## Async and defer in script tag
+
+- **Without async/defer** : HTML parsing is blocked immediately when the script is encountered, until it’s loaded and executed.
+- **async** : Script is loaded in the background. When it’s ready, HTML parsing is paused and the script executes immediately
+- **defer** : Script is loaded in the background, but it waits to execute until after HTML parsing is complete.
+
 
 
