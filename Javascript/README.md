@@ -773,7 +773,7 @@ fn.__proto__.__proto__.__proto__ : null
 
 ### Use Case Example
 **Typing in a search bar**:
-Without debouncing, an API call might be triggered on every keystroke. With debouncing, the function is triggered only after the user stops typing for X milliseconds.
+- Without debouncing, an API call might be triggered on every keystroke. With debouncing, the function is triggered only after the user stops typing for X milliseconds.
 
 ### How It Works
 - A timer is started when the function is called.
@@ -799,7 +799,49 @@ function debounce(delay) {
 }
 
 const debouncedFunc = debounce(300);
-input.addEventListener("keyup", debouncedFunc);
+
+//  Example use: <input type="text" onkeyup="debouncedFunc()" />
+
+```
+
+## Throttling
+
+- Throttle is a technique used to limit the number of times a function is executed over time. It ensures a function is called at most once in every X milliseconds, even if triggered multiple times.
+
+### Use Case Example
+- Window resizing, Button Clicks , Network API calls on rapid events
+
+### How It Works
+- It executes immediately on the first call.
+- Ignores subsequent calls for the given delay period.
+- After the delay, it resets and allows the function to run again.
+
+```
+
+let count = 0;
+
+const getData = () => {
+  console.log("fetching", ++count);
+};
+
+function throttle(delay) {
+  let flag = true;
+
+  return function () {
+    if (flag) {
+      getData();
+      flag = false;
+
+      setTimeout(() => {
+        flag = true;
+      }, delay);
+    }
+  };
+}
+
+const throttlingFunc = throttle(1000);
+
+// Example use: <button onclick="throttlingFunc()">Click me</button>
 
 ```
 
