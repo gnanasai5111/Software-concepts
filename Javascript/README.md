@@ -765,4 +765,43 @@ fn.__proto__.__proto__.__proto__ : null
 
 ```
 
+## Debouncing
+
+- Debouncing is a programming pattern used to limit the rate at which a function is executed. It ensures that a function is only triggered after a certain period of inactivity, useful for optimizing performance (e.g., in search inputs, scroll events).
+
+
+
+### Use Case Example
+**Typing in a search bar**:
+Without debouncing, an API call might be triggered on every keystroke. With debouncing, the function is triggered only after the user stops typing for X milliseconds.
+
+### How It Works
+- A timer is started when the function is called.
+- If the function is triggered again before the timer ends, the **previous timer is canceled**.
+- Only the **most recent invocation** after inactivity runs the function.
+
+```
+
+let count=0;
+
+const getData=()=>{
+  console.log("fetching data",++count);
+}
+
+function debounce(delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      getData()
+    }, delay);
+  };
+}
+
+const debouncedFunc = debounce(300);
+input.addEventListener("keyup", debouncedFunc);
+
+```
+
+
 
