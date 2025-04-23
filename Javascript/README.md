@@ -845,5 +845,38 @@ const throttlingFunc = throttle(1000);
 
 ```
 
+## Event Propogation, Bubbling, Capturing, Delegation
+
+**Event Propogation** - Event propagation determines the order in which elements receive events.
+2 ways to handle event propogation
+
+1. **Event bubbling** - Events go from child → parent
+2. **Event Capturing** - Events go from parent → child
+
+```
+
+document.getElementById("element").addEventListener("click", (e) => {}, true);
+
+```
+
+- The third parameter (true or false) is useCapture. If true, the listener runs in the capturing phase.  If false or omitted, it runs in the bubbling phase (default).
+- Use e.stopPropagation() to prevent further propagation of the event in the bubbling/capturing phase.
+
+### Event Delegation
+
+- Event delegation is a technique to handle events efficiently, especially for dynamic or multiple child elements.
+- Instead of attaching event listeners to each child, attach one listener to a common parent, and use e.target to identify which child triggered the event.
+
+```
+
+document.getElementById("parent").addEventListener("click", (e) => {
+  if (e.target.classList.contains("card")) {
+    console.log("Card clicked:", e.target);
+  }
+});
+
+```
+
+
 
 
