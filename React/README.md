@@ -320,4 +320,57 @@ export default Welcome;
 
 - It’s usually better to use one of the other methods like binding in the constructor or using an arrow function in the class property.(2 and 3 methods)
 
+## Conditional Rendering
+- Conditional rendering means showing components or elements based on a condition.
+
+```
+
+{isLoggedIn ? <Dashboard /> : <Login />}
+
+{hasError && <p>Error occurred!</p>}
+
+function Greeting({ isLoggedIn }) {
+  if (isLoggedIn) return <h1>Welcome!</h1>;
+  else return <h1>Please login</h1>;
+}
+
+```
+
+## List Rendering
+
+- Used to render multiple items from an array using .map()
+
+```
+
+const users = ["Alice", "Bob", "Charlie"];
+
+{users.map((user, index) => (
+  <p key={index}>{user}</p>
+))}
+
+```
+- **Keys** are special string attribute that help react indentify which elements have been changed, addeded or removed. A key must be unique among siblings.
+
+- When a React component re-renders (for example, due to state or props change), React doesn't directly update the real DOM. Instead, it updates a lightweight copy called the Virtual DOM.
+
+Here's how the process works:
+
+- React creates a new Virtual DOM that represents the updated UI.
+- It then compares the new Virtual DOM with the previous one using a process called diffing.
+
+During this comparison, keys play a critical role:
+
+- They help React identify which items in a list have changed, moved, been added, or removed.
+- If a key remains the same between renders, React assumes the item is the same and preserves its DOM node and internal state.
+- If the key is different or reused incorrectly (like using index), React destroys the old node and creates a new one, which can lead to performance issues and UI bugs.
+- After diffing, React performs reconciliation — it updates only the parts of the real DOM that actually changed, instead of re-rendering the whole page.
+
+**Why Keys Matter**
+
+- With the right keys (like unique IDs), React efficiently updates the DOM with minimal changes.
+- Using unstable keys (like array index) makes it hard for React to match elements correctly, leading to unnecessary re-renders or even incorrect UI behavior.
+
+- **Diffing** is comparing the old and new Virtual DOM trees to find differences.
+- **Reconciliation** is updating the real DOM efficiently based on those differences.
+
 
