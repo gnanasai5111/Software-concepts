@@ -532,4 +532,58 @@ App.module.css (for CSS Modules)
 
 ```
 
+## Controlled and uncontrolled components
+
+- In controlled components, the form element's value is controlled by React state. The value of the input is always in sync with the component's state, and React handles all updates to the state.
+
+```
+
+import React, { useState } from 'react';
+
+function ControlledInput() {
+  const [value, setValue] = useState('');
+
+  const handleChange = (e) => {
+    setValue(e.target.value); // React state controls the input value
+  };
+
+  return (
+    <input
+      type="text"
+      value={value} // The value is controlled by state
+      onChange={handleChange}
+    />
+  );
+}
+
+export default ControlledInput;
+
+```
+- In uncontrolled components, form data is handled by the DOM itself, rather than React. You don't manage the state of the form element, and you access the value using a ref.
+
+```
+
+import React, { useRef } from 'react';
+
+function UncontrolledInput() {
+  const inputRef = useRef();
+
+  const handleSubmit = () => {
+    alert('Value: ' + inputRef.current.value); // Get the value via ref
+  };
+
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
+  );
+}
+
+export default UncontrolledInput;
+
+```
+
+- In general, controlled components are preferred for forms where you need full control over the input fields and data, whereas uncontrolled components can be used for simpler forms where you don’t need to interact with the input state frequently.
+
 
