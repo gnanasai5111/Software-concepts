@@ -137,4 +137,37 @@ class Welcome extends Component {
 
 ```
 
+### this.setState
+
+- It's the method used to update the component’s state.
+- When you call setState(), React will re-render the component with the updated state.
+- It is asynchronous — meaning it may not update the state immediately.
+
+2 ways using setState
+
+```
+// first one
+this.setState({ count: this.state.count + 1 });
+
+// second one
+this.setState((prevState) => ({
+  count: prevState.count + 1
+}));
+
+React may batch multiple setState calls together for performance.
+So if you're doing:
+
+this.setState({ count: this.state.count + 1 });
+this.setState({ count: this.state.count + 1 });
+You might still end up with only +1 instead of +2.
+
+✅ But with callback:
+
+this.setState(prev => ({ count: prev.count + 1 }));
+this.setState(prev => ({ count: prev.count + 1 }));
+You’ll correctly get +2.
+
+
+```
+
 
