@@ -586,4 +586,6 @@ export default UncontrolledInput;
 
 - In general, controlled components are preferred for forms where you need full control over the input fields and data, whereas uncontrolled components can be used for simpler forms where you don’t need to interact with the input state frequently.
 
+## Life
+
 
