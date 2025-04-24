@@ -397,4 +397,139 @@ During this comparison, keys play a critical role:
 
 - Reconciliation: React uses the virtual DOM to figure out the minimal set of updates to apply to the real DOM (through a process called reconciliation). This minimizes re-rendering and improves performance.
 
+## React styling 
+
+### Inline Styles
+
+Pros: Easy to use, ideal for small components or dynamic styles.
+Cons: Cannot use media queries, pseudo-classes, or complex styles.ions.
+
+ ### Stylesheets (CSS)
+
+Pros: Well-known, easy to set up, and supports all CSS features.
+Cons: Global scope can lead to style conflicts, harder to maintain in large applications.
+
+ ### CSS Modules
+
+Pros: Well-known, easy to set up, supports all CSS features.
+Cons: Global styles can cause conflicts, harder to manage in large apps.
+
+ ### Styled Components
+
+Pros: Combines CSS with JavaScript for scoped and dynamic styles, supports all CSS features.
+Cons: Adds a dependency, may impact performance and increase bundle size..
+
+```
+
+import React, { useState } from "react";
+
+// Inline Styles
+const inlineStyles = {
+  backgroundColor: "lightblue",
+  color: "darkblue",
+  padding: "10px",
+  borderRadius: "5px",
+};
+
+// Stylesheets (CSS)
+import './styles.css';
+
+// CSS Modules
+import styles from './App.module.css';
+
+// Styled Components
+import styled from 'styled-components';
+
+const Button = styled.button`
+  background-color: lightcoral;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  &:hover {
+    background-color: coral;
+  }
+`;
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      {/* Inline Styles */}
+      <div style={inlineStyles}>
+        <h1>Inline Styles</h1>
+        <p>Count: {count}</p>
+        <button style={inlineStyles} onClick={() => setCount(count + 1)}>
+          Increment
+        </button>
+      </div>
+
+      {/* Stylesheets (CSS) */}
+      <div className="stylesheet">
+        <h1>Stylesheets (CSS)</h1>
+        <p>Count: {count}</p>
+        <button className="button" onClick={() => setCount(count + 1)}>
+          Increment
+        </button>
+      </div>
+
+      {/* CSS Modules */}
+      <div className={styles.moduleContainer}>
+        <h1>CSS Modules</h1>
+        <p>Count: {count}</p>
+        <button className={styles.button} onClick={() => setCount(count + 1)}>
+          Increment
+        </button>
+      </div>
+
+      {/* Styled Components */}
+      <div>
+        <h1>Styled Components</h1>
+        <p>Count: {count}</p>
+        <Button onClick={() => setCount(count + 1)}>
+          Increment
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+styles.css (for Stylesheets)
+
+/* Global styles */
+.stylesheet {
+  background-color: lightyellow;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.button {
+  background-color: lightgreen;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+App.module.css (for CSS Modules)
+
+
+/* Scoped styles using CSS Modules */
+.moduleContainer {
+  background-color: lightgreen;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.button {
+  background-color: lightpink;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
+```
+
 
