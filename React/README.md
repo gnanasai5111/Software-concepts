@@ -170,4 +170,154 @@ You’ll correctly get +2.
 
 ```
 
+## Event Handler and Binding
+
+- An event handler is a function that runs when a user interacts with the UI — like clicking a button, typing in an input, etc.
+
+```
+
+import React from "react";
+
+class Welcome extends React.Component {
+  constructor() {
+    super();
+    this.state = { count: 0 };
+  }
+
+  clickHandler() {
+    console.log(this); // Here this is undefined
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.count}</h1>
+        <button onClick={this.clickHandler}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Welcome;
+
+// When a regular function is called in strict mode, and it's not bound to any object, the value of this becomes undefined
+
+**There are ways to handle this**
+
+First approach :
+
+import React from "react";
+
+class Welcome extends React.Component {
+  constructor() {
+    super();
+    this.state = { count: 0 };
+  }
+
+  clickHandler() {
+    console.log(this);
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.count}</h1>
+        <button onClick={this.clickHandler.bind(this)}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Welcome;
+
+- this.clickHandler.bind(this) ensures that this inside the function always refers to the current instance of the Welcome class, preventing it from being undefined.
+- Calling .bind(this) inside render() creates a new function on every re-render, which can impact performance.
+
+Second approach :
+
+- To optimize, bind the method once in the constructor or use an arrow function.
+
+import React from "react";
+
+class Welcome extends React.Component {
+  constructor() {
+    super();
+    this.state = { count: 0 };
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+
+  clickHandler() {
+    console.log(this);
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.count}</h1>
+        <button onClick={this.clickHandler}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Welcome;
+
+Third approach :
+
+import React from "react";
+
+class Welcome extends React.Component {
+  constructor() {
+    super();
+    this.state = { count: 0 };
+  }
+
+  clickHandler = () => {
+    console.log(this);
+  };
+  render() {
+    return (
+      <div>
+        <h1>{this.state.count}</h1>
+        <button onClick={this.clickHandler}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Welcome;
+
+- Arrow functions don’t have their own this binding. Instead, they lexically inherit this from their parent scope (the context where the function is defined).
+- In the case of React class components, when you define an arrow function as a method, this refers to the class instance, because the arrow function inherits this from the class constructor (the parent scope).
+
+Fourth approach :
+
+import React from "react";
+
+class Welcome extends React.Component {
+  constructor() {
+    super();
+    this.state = { count: 0 };
+  }
+
+  clickHandler() {
+    console.log(this);
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.count}</h1>
+        <button onClick={() => this.clickHandler()}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Welcome;
+
+- Arrow functions inherit this lexically from their surrounding context, so using () => this.clickHandler() ensures this correctly refers to the component instance in the method.
+- Using an arrow function in the event handler ensures this is correctly bound, but it creates a new function on each render, which can impact performance in larger apps
+
+
+```
+
+- It’s usually better to use one of the other methods like binding in the constructor or using an arrow function in the class property.(2 and 3 methods)
+
 
