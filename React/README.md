@@ -896,6 +896,62 @@ export default App;
 
 ```
 
+## Memo
+
+- React.memo is a higher-order component for functional components.
+- It memoizes the component and prevents unnecessary re-renders if props haven’t changed (shallow comparison).
+
+```
+
+const Child = React.memo(({ value }) => {
+  console.log('Child rendered');
+  return <div>{value}</div>;
+});
+
+```
+
+## Ref and forward ref
+
+- It references DOM elements that persist across renders without causing a re-render.
+
+```
+
+import React from 'react';
+
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef(); // create ref
+  }
+
+  focusInput = () => {
+    this.inputRef.current.focus(); // access DOM node
+  };
+
+  render() {
+    return (
+      <div>
+        <input ref={this.inputRef} placeholder="Type here..." />
+        <button onClick={this.focusInput}>Focus Input</button>
+      </div>
+    );
+  }
+}
+
+```
+
+- **Forward Ref** : forwardRef is used to pass refs from parent to child functional components.
+
+```
+
+import React, { forwardRef } from 'react';
+
+const CustomInput = forwardRef((props, ref) => {
+  return <input ref={ref} {...props} />;
+});
+
+```
+
   
 
 
