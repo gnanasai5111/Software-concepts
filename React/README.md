@@ -952,6 +952,75 @@ const CustomInput = forwardRef((props, ref) => {
 
 ```
 
+## Portals
+
+- React Portal lets you render a child component into a DOM node that exists outside the main parent DOM hierarchy.
+- To render components outside the root div, usually for:Modals, Tooltips, Dropdowns, Popups
+
+```
+
+function App() {
+  return (
+    <div>
+      <h1>Main App</h1>
+      <Modal>
+        <h2>This is rendered using a Portal!</h2>
+      </Modal>
+    </div>
+  );
+}
+
+import ReactDOM from 'react-dom';
+
+function Modal({ children }) {
+  return ReactDOM.createPortal(
+    <div className="modal">{children}</div>,
+    document.getElementById('modal-root') // Target outside root
+  );
+}
+
+// ReactDOM.createPortal(child, container)
+
+```
+
+## Error Boundaries
+
+- Error Boundaries are React components that catch JavaScript errors in their child component tree, log the error, and display a fallback UI instead of crashing the whole app.
+
+- A class component becomes an error boundary by defining either of getDerivedStateFromError or componentDidCatch lifecycle methods.
+- The placement of error boundary matters as it controls if the entire app should have the fallback ui or just the component cauisng the problem.
+
+```
+
+import React from 'react';
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  // Lifecycle method to catch error
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  // Optional: log error
+  componentDidCatch(error, errorInfo) {
+    console.error("Caught by Error Boundary:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h2>Something went wrong.</h2>; // fallback UI
+    }
+
+    return this.props.children;
+  }
+}
+
+```
+
   
 
 
