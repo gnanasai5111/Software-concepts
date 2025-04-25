@@ -161,7 +161,127 @@ function Counter() {
 
 export default Counter;
 
+```
 
+## useRef
+
+- Creates a reference to a DOM element or a value.
+- Lets you access or update the reference without causing a re-render.
+- The reference persists across re-renders
+
+```
+
+import { useRef, useEffect } from 'react';
+
+function MyComponent() {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus(); // Focus input on mount
+  }, []);
+
+  return <input ref={inputRef} />;
+}
+
+```
+
+## useMemo
+
+- useMemo memoizes a computed value.(It caches the value)
+- It only recomputes the value when dependencies change.
+- Used to avoid expensive calculations on every render.
+
+```
+
+import { useMemo, useState } from "react";
+import "./styles.css";
+
+export default function App() {
+  const [number, setNumber] = useState(0);
+  const [dark, setDark] = useState(false);
+
+  function slowFunction(number) {
+    for (let i = 0; i < 100000; i++) {}
+    return number * 2;
+  }
+
+  const doubleNumber = useMemo(() => {
+    return slowFunction(number);
+  }, [number]);
+
+  const themeStyles = useMemo(() => {
+    return {
+      backgroundColor: dark ? "black" : "white",
+      color: dark ? "white" : "black",
+    };
+  }, [dark]);
+  return (
+    <div className="App">
+      <input
+        type="number"
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+      />
+      <button onClick={() => setDark((prev) => !prev)}>Toggle Theme</button>
+      <div style={themeStyles}>{doubleNumber}</div>
+    </div>
+  );
+}
+
+```
+
+## useCallback
+
+- useCallback memoizes a function.(It caches the function)
+- It returns the same function instance unless the dependencies change.
+- Helps prevent unnecessary re-creations of functions on every render.
+- Mostly used to optimize performance, especially when passing functions as props to child components.
+
+```
+
+import { useCallback, useState } from "react";
+import List from "./List";
+import "./styles.css";
+
+export default function App() {
+  const [number, setNumber] = useState(0);
+  const [dark, setDark] = useState(false);
+
+  const getItems = useCallback(() => {
+    return [number, number + 1, number + 2];
+  }, [number]);
+
+  const themeStyles = {
+    backgroundColor: dark ? "black" : "white",
+    color: dark ? "white" : "black",
+  };
+
+  return (
+    <div style={themeStyles}>
+      <input
+        type="number"
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+      />
+      <button onClick={() => setDark((prev) => !prev)}>Toggle Theme</button>
+      <List getItems={getItems} />
+    </div>
+  );
+}
+
+import { useEffect, useState } from "react";
+
+const List = ({ getItems }) => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setItems(getItems());
+  }, [getItems]);
+
+  return items.map((i) => <h1>{i}</h1>);
+};
+
+export default List;
 
 ```
 
