@@ -825,4 +825,77 @@ export default LifecycleDemo;
 
 ```
 
+## Fragments
+
+- Fragments are used to group multiple elements together.
+
+```
+
+<>
+<h1>Hello</h1>
+<div>test</div>
+</>
+
+or
+
+<React.Fragment>
+<h1>Hello</h1>
+<div>test</div>
+</React.Fragment>
+
+```
+
+## Pure Components
+
+-A Pure Component in React is created by extending the React.PureComponent class.
+- Unlike Component, PureComponent automatically implements the shouldComponentUpdate() lifecycle method
+- It performs a shallow comparison of previous and current props and state to determine whether the component should re-render.
+- If there's no difference, the component won’t re-render, leading to performance optimizations, especially in large applications.
+  
+**Shallow comparison** :
+
+1. Primitive types (strings,numbers etc)
+- Shallow comparison checks if the values are equal.
+
+2. Complex types (arrays,objects etc)
+- Shallow comparison checks if the references are the same, not their contents.
+
+```
+
+import React, { PureComponent } from 'react';
+
+class Counter extends PureComponent {
+  render() {
+    console.log('Counter component rendered');
+    return <h1>Counter: {this.props.count}</h1>;
+  }
+}
+
+class App extends React.Component {
+  state = {
+    count: 0
+  };
+
+  componentDidMount() {
+    setInterval(() => {
+      // Even though we're setting the same value, PureComponent prevents re-render
+      this.setState({ count: 0 });
+    }, 1000);
+  }
+
+  render() {
+    return (
+      <div>
+        <Counter count={this.state.count} />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+```
+
+  
+
 
