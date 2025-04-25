@@ -285,4 +285,43 @@ export default List;
 
 ```
 
+## useLayoutEffect 
+
+- useLayoutEffect is just like useEffect, **but it runs synchronously after all DOM mutations, before the browser paints the screen.
+- It's useful when you need to measure the DOM or make layout changes before the browser paints.
+
+```
+
+import { useLayoutEffect, useEffect, useRef, useState } from "react";
+
+function App() {
+  const [show, setShow] = useState(false);
+  const popup = useRef();
+  const button = useRef();
+  useLayoutEffect(() => {
+    if (popup.current == null || button.current == null) {
+      return;
+    }
+    const { bottom } = button.current.getBoundingClientRect();
+    popup.current.style.top = `${bottom + 25}px`;
+  }, [show]);
+
+  return (
+    <div>
+      <button ref={button} onClick={() => setShow((prev) => !prev)}>
+        click
+      </button>
+      {show && (
+        <div style={{ position: "absolute" }} ref={popup}>
+          This is Popup
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
+
+```
+
 
