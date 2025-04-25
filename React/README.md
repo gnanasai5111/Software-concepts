@@ -1021,6 +1021,84 @@ class ErrorBoundary extends React.Component {
 
 ```
 
+## Higher Order Component(HOC)
+
+- A Higher Order Component is a function that takes a component and returns a new enhanced component.
+
+```
+
+import React from 'react';
+import withLoader from './withLoader';
+import User from './User';
+import ProductList from './ProductList';
+import { fetchUser, fetchProducts } from './api';
+
+const UserWithLoader = withLoader(User, fetchUser);
+const ProductsWithLoader = withLoader(ProductList, fetchProducts);
+
+function App() {
+  return (
+    <div>
+      <h1>HOC Example</h1>
+      <UserWithLoader />
+      <ProductsWithLoader />
+    </div>
+  );
+}
+
+export default App;
+
+
+function ProductList({ data }) {
+  return (
+    <div>
+      <h2>Product List</h2>
+      <ul>
+        {data.map((item, idx) => (
+          <li key={idx}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+export default ProductList;
+
+function User({ data }) {
+  return (
+    <div>
+      <h2>User Info</h2>
+      <p>Name: {data.name}</p>
+      <p>Age: {data.age}</p>
+    </div>
+  );
+}
+export default User;
+
+import React, { useEffect, useState } from 'react';
+
+function withLoader(WrappedComponent, fetchDataFn) {
+  return function EnhancedComponent(props) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      fetchDataFn().then((response) => {
+        setData(response);
+        setLoading(false);
+      });
+    }, []);
+
+    if (loading) {
+      return <h3>Loading...</h3>;
+    }
+
+    return <WrappedComponent {...props} data={data} />;
+  };
+}
+export default withLoader;
+
+```
+
   
 
 
