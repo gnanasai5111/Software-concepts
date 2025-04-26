@@ -164,3 +164,117 @@ store.dispatch(getUsers());
 unsubscribe();
 
 ```
+
+##  react-redux
+
+- react-redux is a library that provides bindings to connect Redux with React apps.
+
+**store.js**
+
+```
+
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import { bakeryReducer } from "./bakeryReducer";
+import { userReducer } from "./userReducer";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
+
+const rootReducer = combineReducers({
+  bakery: bakeryReducer,
+  user: userReducer,
+});
+
+export const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+
+```
+
+**index.js (or your app entry)**
+
+```
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { Provider } from "react-redux";
+import { store } from "./store";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
+```
+
+**connect()**
+
+```
+
+import React from "react";
+import { connect } from "react-redux";
+import { buyCake, buyIcecream } from "./bakeryReducer";
+
+const BakeryComponentConnect = ({ cake, icecream, buyCake, buyIcecream }) => {
+  return (
+    <div>
+      <h2>Bakery Items (Connect Way)</h2>
+      <p>Cakes: {cake}</p>
+      <p>Icecreams: {icecream}</p>
+      <button onClick={buyCake}>Buy Cake</button>
+      <button onClick={buyIcecream}>Buy Icecream</button>
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    cake: state.bakery.cake,
+    icecream: state.bakery.icecream,
+  }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    buyCake:()=>dispatch(buyCake()),
+    buyIcecream:()=>dispatch(buyIcecream()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BakeryComponentConnect);
+
+```
+
+**Hooks**
+
+```
+
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getUsers } from "./userReducer";
+
+const UserComponentHooks = () => {
+  const { loading, users, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
+  return (
+    <div>
+      <h2>Users (Hooks Way)</h2>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default UserComponentHooks;
+
+```
