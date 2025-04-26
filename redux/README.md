@@ -28,7 +28,7 @@
 - Use switch-case on action types.
 
 ## Middleware
-- Redux Thunk allows async actions (functions instead of plain objects).
+- Redux Thunk is a middleware that lets you write functions inside your actions — instead of just plain objects — to handle asynchronous logic like API calls.
 - Redux Logger logs actions and state changes to console.
 
 ```
