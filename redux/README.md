@@ -278,3 +278,198 @@ const UserComponentHooks = () => {
 export default UserComponentHooks;
 
 ```
+
+## Redux toolkit
+- Redux toolkit is the library for the efficient redux development
+- It simplifies the process of writing Redux logic.
+- It comes with utilities like createSlice, configureStore, and built-in redux-thunk for async logic.
+
+- configureStore() - Simplified version of createStore, automatically sets up Redux DevTools and accepts middleware easily.
+- createSlice() - Combines action creators + reducer logic into one piece.
+- createAsyncThunk() - Simplifies async API calls like fetching users.
+
+npm i @reduxjs/toolkit
+
+**bakerySlice.js**
+
+```
+
+import { createSlice } from '@reduxjs/toolkit';
+
+const bakerySlice = createSlice({
+  name: 'bakery',
+  initialState: {
+    cake: 20,
+    icecream: 10,
+  },
+  reducers: {
+    buyCake: (state) => {
+      state.cake--; // RTK uses Immer.js, so direct state mutation is allowed safely
+    },
+    buyIcecream: (state) => {
+      state.icecream--;
+    },
+  },
+});
+
+export const { buyCake, buyIcecream } = bakerySlice.actions;
+export default bakerySlice.reducer;
+
+```
+
+**userSlice.js**
+
+```
+
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+// Async thunk for fetching users
+export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
+  const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+  return response.data;
+});
+
+// Because async/await makes the code cleaner, easier to read, and avoid deep .then() chains:
+// Easier to add try/catch for error handling later.
+
+(or)
+
+// export const fetchUsers = createAsyncThunk('users/fetchUsers', () => {
+//   return axios.get('https://jsonplaceholder.typicode.com/users')
+//     .then((response) => response.data);
+// });
+
+const userSlice = createSlice({
+  name: 'users',
+  initialState: {
+    loading: false,
+    users: [],
+    error: '',
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUsers.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.users = action.payload;
+        state.error = '';
+      })
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.users = [];
+        state.error = action.error.message;
+      });
+  },
+});
+
+export default userSlice.reducer;
+
+```
+
+**store.js**
+
+```
+
+import { configureStore } from '@reduxjs/toolkit';
+import bakeryReducer from './bakerySlice';
+import userReducer from './userSlice';
+import logger from 'redux-logger';
+
+const store = configureStore({
+  reducer: {
+    bakery: bakeryReducer,
+    users: userReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  devTools: true,
+});
+
+export default store;
+
+```
+
+**App.js**
+
+```
+
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { buyCake, buyIcecream } from './bakerySlice';
+import { fetchUsers } from './userSlice';
+
+const App = () => {
+  const bakery = useSelector((state) => state.bakery);
+  const users = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
+  return (
+    <div>
+      <h2>Bakery</h2>
+      <p>Cakes: {bakery.cake}</p>
+      <p>Icecreams: {bakery.icecream}</p>
+      <button onClick={() => dispatch(buyCake())}>Buy Cake</button>
+      <button onClick={() => dispatch(buyIcecream())}>Buy Icecream</button>
+
+      <h2>Users</h2>
+      {users.loading && <p>Loading...</p>}
+      {users.error && <p>Error: {users.error}</p>}
+      {users.users.map((user) => (
+        <p key={user.id}>{user.name}</p>
+      ))}
+    </div>
+  );
+};
+
+export default App;
+
+```
+
+**index.js**
+
+```
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import App from './App';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
+```
+
+**You can also access all this properties in thunkApi**
+
+```
+
+export const fetchUsers = createAsyncThunk(
+  'users/fetchUsers',
+  async (payload, thunkAPI) => {
+    console.log(payload); // the data you pass when dispatching
+    console.log(thunkAPI.getState()); // Redux state
+    console.log(thunkAPI.dispatch); // dispatch function
+    console.log(thunkAPI.signal); // AbortController for cancellation
+
+    try {
+      const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.message); // better error control
+    }
+  }
+);
+
+```
