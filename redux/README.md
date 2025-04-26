@@ -366,6 +366,9 @@ const userSlice = createSlice({
   },
 });
 
+// If you used rejectWithValue(), error will be in action.payload.
+// If you throw error (or axios crashes), error will be in action.error.message.
+
 export default userSlice.reducer;
 
 ```
