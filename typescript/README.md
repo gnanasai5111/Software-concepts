@@ -227,6 +227,20 @@ type IdentityFunc<T> = (arg: T) => T;
 const myIdentity: IdentityFunc<number> = (arg) => arg;
 ```
 
+###  Interface for generic function:
+
+```
+interface IdentityFn<T> {
+  (value: T): T;
+}
+
+const identity: IdentityFn<number> = (value) => {
+  return value;
+};
+
+console.log(identity(5)); 
+```
+
 ### Generics in Interfaces
 
 ```
