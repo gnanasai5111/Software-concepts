@@ -7,7 +7,7 @@
 
 ## 🎯 Basics
 
-```ts
+```
 let a: number = 10;
 let b: string = "Hai";
 let c: boolean = true;
