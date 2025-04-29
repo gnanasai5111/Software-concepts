@@ -81,7 +81,7 @@ export const UserCard = (props: UserProps) => {
 <UserCard user={{ id: 1, name: 'Alice' }} />
 ```
 
-### 4. Passing HTML Element via Props
+### Passing HTML Element via Props
 
 ```
 type HtmlElementProps = {
@@ -101,7 +101,7 @@ export const HtmlContainer = (props: HtmlElementProps) => {
 
 ---
 
-### 5. Passing React Element via Props
+### Passing React Element via Props
 
 ```
 type CustomComponentProps = {
