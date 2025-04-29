@@ -21,6 +21,14 @@ let d: any = "Could be anything";
 ```
 let arr: number[] = [1, 2, 3];
 let arr1: Array<number> = [1, 2, 3];
+let arr: { id: number; name: string }[] = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' }
+];
+let arr1: Array<{ id: number; name: string }> = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' }
+];
 ```
 
 ---
