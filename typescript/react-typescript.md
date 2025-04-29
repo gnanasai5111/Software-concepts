@@ -366,5 +366,61 @@ function List<T>({ items, renderItem }: ListProps<T>) {
 
 ```
 
+example 2
+
+```
+
+type ListProps<T> = {
+  items: T[];
+};
+
+export const List = <T,>(props: ListProps<T>) => {
+  return (
+    <div>
+      {props.items.map((item, index) => {
+        if (typeof item === "object") {
+          // If item is an object and has a 'name' property
+          return <h1 key={index}>{(item as any).name}</h1>;
+        } else {
+          // If item is a string or number
+          return <h1 key={index}>{String(item)}</h1>;
+        }
+      })}
+    </div>
+  );
+};
+
+import { Greet } from "./Greet";
+import { List } from "./List";
+import "./styles.css";
+
+export default function App() {
+  return (
+    <div className="App">
+      <List items={[1, 2, 3]} />
+      <List items={["sai", "gnana", "dachi"]} />
+      <List
+        items={[
+          {
+            id: 1,
+            name: "sai",
+          },
+          {
+            id: 2,
+            name: "gnana",
+          },
+          {
+            id: 1,
+            name: "dachi",
+          },
+        ]}
+      />
+    </div>
+  );
+}
+
+
+```
+
 
 
