@@ -108,6 +108,9 @@ type CustomComponentProps = {
   component: React.ReactNode;
 };
 
+// JSX content (<div>Hello</div>)	React.ReactNode
+// Component  (<Component />)	React.ComponentType
+
 export const ComponentContainer = (props: CustomComponentProps) => {
   return <section>{props.component}</section>;
 };
