@@ -255,3 +255,91 @@ const divStyle: React.CSSProperties = {
 };
 <div style={divStyle}>Styled Div</div>
 ```
+
+## React Hooks with TypeScript
+
+### 🛠️ useState
+
+```
+type User = {
+  name: string;
+  age: number;
+  email: string;
+};
+
+const [user, setUser] = useState<User>({
+  name: '',
+  age: 0,
+  email: '',
+});
+```
+
+```
+<button onClick={() => setUser({ name: 'John', age: 30, email: 'john@example.com' })}>
+  Set User
+</button>
+```
+
+
+### useRef (with input focus)
+
+```
+const inputRef = useRef<HTMLInputElement>(null);
+
+const focusInput = () => {
+  inputRef.current?.focus();
+};
+```
+
+```
+<input ref={inputRef} type="text" />
+<button onClick={focusInput}>Focus Input</button>
+```
+
+### useContext (strict context with non-null default)
+
+```
+type AuthContextType = {
+  user: string;
+  login: (name: string) => void;
+};
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+```
+
+### useReducer (complex form management)
+
+```
+type FormState = {
+  username: string;
+  password: string;
+  rememberMe: boolean;
+};
+
+type FormAction =
+  | { type: 'SET_USERNAME'; payload: string }
+  | { type: 'SET_PASSWORD'; payload: string }
+  | { type: 'TOGGLE_REMEMBER' };
+
+const formReducer = (state: FormState, action: FormAction): FormState => {
+  switch (action.type) {
+    case 'SET_USERNAME':
+      return { ...state, username: action.payload };
+    case 'SET_PASSWORD':
+      return { ...state, password: action.payload };
+    case 'TOGGLE_REMEMBER':
+      return { ...state, rememberMe: !state.rememberMe };
+    default:
+      return state;
+  }
+};
+
+const [formState, dispatch] = useReducer(formReducer, {
+  username: '',
+  password: '',
+  rememberMe: false,
+});
+```
+
+
+
