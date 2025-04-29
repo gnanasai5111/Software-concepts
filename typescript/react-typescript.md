@@ -109,7 +109,7 @@ type CustomComponentProps = {
 };
 
 // JSX content (<div>Hello</div>)	React.ReactNode
-// Component  (<Component />)	React.ComponentType
+// Component  (<Component />)	React.ComponentType<> - you can add props inside <>
 
 export const ComponentContainer = (props: CustomComponentProps) => {
   return <section>{props.component}</section>;
