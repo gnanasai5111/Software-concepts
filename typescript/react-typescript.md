@@ -344,5 +344,27 @@ const [formState, dispatch] = useReducer(formReducer, {
 });
 ```
 
+## Generic List Component 
+
+```
+
+type ListProps<T> = {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+};
+
+function List<T>({ items, renderItem }: ListProps<T>) {
+  return <ul>{items.map(renderItem)}</ul>;
+}
+
+<List
+  items={[{ id: 1, name: 'John' }, { id: 2, name: 'Jane' }]}
+  renderItem={(user) => <li key={user.id}>{user.name}</li>}
+/>
+
+// You can extend it like T extends { id: number } to restrict structure
+
+```
+
 
 
