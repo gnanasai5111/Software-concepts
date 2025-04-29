@@ -422,5 +422,97 @@ export default function App() {
 
 ```
 
+## React.ReactNode
+
+```
+// Represents anything React can render: JSX, string, number, null, array, etc.
+type PropsWithChildren = {
+  children: React.ReactNode;
+};
+
+const Card = ({ children }: PropsWithChildren) => {
+  return <div>{children}</div>;
+};
+
+<Card>Hello</Card>
+<Card><h1>Title</h1><p>Content</p></Card>
+```
+
+
+## React.ComponentType
+```
+
+//  Represents a React Component itself (function or class), not JSX.
+// Useful when you want to pass a component via props and render it later.
+
+type RendererProps = {
+  component: React.ComponentType<{ title: string }>;
+};
+
+const Renderer = ({ component: Component }: RendererProps) => {
+  return <Component title="Hello from ComponentType" />;
+};
+
+const Header = ({ title }: { title: string }) => <h1>{title}</h1>;
+
+// Usage
+<Renderer component={Header} />
+```
+
+##  JSX.Element
+```
+
+// Represents the JSX returned by a component. It’s a specific element, not anything renderable.
+// A single React element (not an array, not a string, not multiple things).
+
+
+const MyComponent = (): JSX.Element => {
+  return <h1>Hello from JSX.Element</h1>;
+};
+```
+
+## React.ReactElement
+```
+// A fully constructed element created by JSX or React.createElement.
+// Use when you expect a *valid JSX element* as a prop, NOT strings or numbers.
+
+type WrapperProps = {
+  element: React.ReactElement;
+};
+
+const Wrapper = ({ element }: WrapperProps) => {
+  return <div>{element}</div>;
+};
+
+// Valid usage
+<Wrapper element={<h2>I’m a ReactElement</h2>} />
+
+// ❌ Invalid usage
+<Wrapper element="hello" /> // Error: Not a valid ReactElement
+```
+
+
+##  React.FC (FunctionComponent)
+```
+// Shortcut for typing functional components. Includes `children` by default.
+
+type HeaderProps = {
+  title: string;
+};
+
+const Header: React.FC<HeaderProps> = ({ title, children }) => {
+  return (
+    <>
+      <h1>{title}</h1>
+      <div>{children}</div>
+    </>
+  );
+};
+
+// Usage
+<Header title="React FC">This is the subtitle</Header>
+```
+
+
 
 
