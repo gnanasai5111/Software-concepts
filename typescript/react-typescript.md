@@ -244,3 +244,14 @@ React.ChangeEvent<HTMLInputElement> // access `e.target.files`
 ```tsx
 <input type="file" onChange={handleFileChange} />
 ```
+
+### CSS styling
+
+```
+const divStyle: React.CSSProperties = {
+  backgroundColor: 'lightblue',
+  padding: '10px',
+  borderRadius: '8px'
+};
+<div style={divStyle}>Styled Div</div>
+```
