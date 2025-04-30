@@ -205,4 +205,32 @@ test('increments, decrements, and resets the counter', async () => {
 - **Mouse Interactions** : click(),dblClick(),tripleClick(),hover(),unhover()
 - **Keyboard Interactions** : type(),tab(),keyboard()
 
+## Testing Providers
+
+- Sometimes your components depend on context providers (like Redux, Theme, Router, etc.). In such cases, you need to wrap them during testing.
+
+```
+render(<Component />, { wrapper: ProviderWrapper });
+```
+
+## Testing CustomHooks
+
+- For Testing custom hooks we use renderHook()
+- Use act() when testing state updates inside hooks.
+
+```
+import { renderHook, act } from '@testing-library/react';
+import { useCounter } from './useCounter';
+
+test('should increment counter', () => {
+  const { result } = renderHook(() => useCounter());
+
+  act(() => {
+    result.current.increment();
+  });
+
+  expect(result.current.count).toBe(1);
+});
+```
+
 
