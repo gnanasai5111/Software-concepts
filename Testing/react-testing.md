@@ -233,4 +233,70 @@ test('should increment counter', () => {
 });
 ```
 
+## Mock Functions
+
+```
+function Button({ onClick }: { onClick: () => void }) {
+  return <button onClick={onClick}>Click Me</button>;
+}
+
+// Test
+test('calls onClick when clicked', async () => {
+  const user = userEvent.setup();
+  const handleClick = jest.fn();
+  render(<Button onClick={handleClick} />);
+  await user.click(screen.getByRole('button'));
+  expect(handleClick).toHaveBeenCalled();
+});
+```
+
+## MSW
+
+- MSW (Mock Service Worker) is a powerful library used for mocking network requests during testing (both unit and integration). It intercepts requests at the network level, just like a real API would work in a browser or Node environment, allowing you to simulate real scenarios without hitting actual backend services.
+
+```
+npm install msw --save-dev
+```
+
+1. **Create Handlers** : A handler is used to define how a request should be mocked.
+```
+// src/mocks/handlers.ts
+import { rest } from 'msw';
+
+export const handlers = [
+  rest.get('/api/user', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({ id: 1, name: 'John Doe' })
+    );
+  }),
+];
+```
+2.setup MSW in your test environment
+```
+// src/mocks/server.ts
+import { setupServer } from 'msw/node';
+import { handlers } from './handlers';
+
+export const server = setupServer(...handlers
+```
+3. Add MSW to jest lifecycle
+```
+import { server } from './mocks/server';
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+```
+4.Usage
+```
+import { render, screen } from '@testing-library/react';
+import App from './App'; // Component that fetches /api/user
+
+test('renders user data', async () => {
+  render(<App />);
+  const user = await screen.findByText(/john doe/i);
+  expect(user).toBeInTheDocument();
+});
+```
 
