@@ -305,4 +305,20 @@ test('renders user data', async () => {
   expect(user).toBeInTheDocument();
 });
 ```
+5 Error Handling
+```
+import { server } from '../mocks/server';
+import { rest } from 'msw';
+
+test('shows error when API fails', async () => {
+  server.use(
+    rest.get('https://jsonplaceholder.typicode.com/users', (req, res, ctx) => {
+      return res(ctx.status(500));
+    })
+  );
+
+  render(<UserList />);
+  expect(await screen.findByText(/error/i)).toBeInTheDocument();
+});
+```
 
