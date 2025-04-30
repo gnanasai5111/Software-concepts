@@ -126,31 +126,31 @@ const heading = screen.getByRole('heading', { level: 1 });
 // The option name is used when matching an element by its visible accessible name, such as the label or inner text of an element.
 ```
 
-- getByLabelText() - Selects input elements by their associated label text.
+- **getByLabelText()** - Selects input elements by their associated label text.
 ```
 const input = screen.getByLabelText('Email');
 ```
-- getByPlaceholderText() - Selects input by its placeholder value
+- **getByPlaceholderText()** - Selects input by its placeholder value
 ```
 const input = screen.getByPlaceholderText('Enter email');
 ```
-- getByText() - 	Selects element by its visible text
+- **getByText()** - 	Selects element by its visible text
 ```
 const heading = screen.getByText('Welcome!');
 ```
-- getByDisplayValue() - Selects input elements by the value they're displaying
+- **getByDisplayValue()** - Selects input elements by the value they're displaying
 ```
 const input = screen.getByDisplayValue('John Doe');
 ```
-- getByAltText() - Selects elements (typically images) by their alt attribute.
+- **getByAltText()** - Selects elements (typically images) by their alt attribute.
 ```
 const logo = screen.getByAltText('Company Logo');
 ```
-- getByTitle() - Selects elements by their title attribute.
+- **getByTitle()** - Selects elements by their title attribute.
 ```
 const closeButton = screen.getByTitle('Close');
 ```
-- getByTestId() - Selects elements by their data-testid attribute.
+- **getByTestId()** - Selects elements by their data-testid attribute.
 ```
 const button = screen.getByTestId('submit-button');
 ```
