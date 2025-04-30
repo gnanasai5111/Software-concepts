@@ -155,3 +155,54 @@ const closeButton = screen.getByTitle('Close');
 const button = screen.getByTestId('submit-button');
 ```
 
+## User Interactions in React Testing Library
+
+-  **@testing-library/user-event** :  A utility to simulate realistic user interactions .
+
+```
+import React, { useState } from 'react';
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h1>Counter: {count}</h1>
+      <button onClick={() => setCount((prev) => prev + 1)}>Increment</button>
+      <button onClick={() => setCount((prev) => prev - 1)}>Decrement</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  );
+}
+
+
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import Counter from './Counter';
+
+test('increments, decrements, and resets the counter', async () => {
+  const user = userEvent.setup();  // It creates the user Instance
+  render(<Counter />);
+
+  // Check initial state
+  expect(screen.getByText(/counter: 0/i)).toBeInTheDocument();
+
+  // Increment
+  await user.click(screen.getByRole('button', { name: /increment/i }));
+  expect(screen.getByText(/counter: 1/i)).toBeInTheDocument();
+
+  // Decrement
+  await user.click(screen.getByRole('button', { name: /decrement/i }));
+  expect(screen.getByText(/counter: 0/i)).toBeInTheDocument();
+
+  // Reset
+  await user.click(screen.getByRole('button', { name: /reset/i }));
+  expect(screen.getByText(/counter: 0/i)).toBeInTheDocument();
+});
+
+```
+
+- **Mouse Interactions** : click(),dblClick(),tripleClick(),hover(),unhover()
+- **Keyboard Interactions** : type(),tab(),keyboard()
+
+
