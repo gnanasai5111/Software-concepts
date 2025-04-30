@@ -1,4 +1,4 @@
-### JEST
+![image](https://github.com/user-attachments/assets/13dc313e-5180-474f-804e-be1994ee87c8)### JEST
 - It is a Javascript testing Framework. It is a test runner that finds the tests, runs the tests, determine whether the tests passed or failed and reports it back in a humam readable manner.
 
 ### React Testing Library
@@ -9,7 +9,7 @@
 2. **Integration Testing** : Testing how multiple units/components work together.
 3. **End-End Testing**: Testing the entire app as a user from the UI perspective.
 
-## test
+## test or it
 - The test method is used to define and run a unit test.
 
 Syntax: **test(name,fn,timeout)**
@@ -64,4 +64,94 @@ describe('ComponentName', () => {
 
 Syntax : test.only() , describe.only() , test.skip() ,describe.skip()
 
+## File Naming conventions
+
+- ComponentName.test.tsx
+- ComponentName.spec.tsx
+- Folder named __tests__ and having tsx files .
+
+## Coverage
+- Its a metric that helps you understand how much of your software code is tested
+
+Syntax : Inside package.json, in scripts , **"coverage":"npm test --coverage --watchAll"**
+
+## Assertions
+- An assertion is a statement that verifies if a specific condition is true. If it's false, the test fails. In Jest, assertions are made using expect().
+
+```
+syntax: expect(actual).toBe(expected);
+ex: expect(1 + 1).toBe(2);
+```
+## Matcher Function
+- A matcher is a function chained to expect() that defines how the actual value should be compared to the expected value.
+
+Jest provides many built-in matchers.
+
+Primitive Matchers
+- toBe(value) : Exact equality (===)  ex: expect(5).toBe(5)
+- toEqual(value) : Deep equality (use for objects/arrays) ex:  expect({ a: 1 }).toEqual({ a: 1 }
+- toBeGreaterThan(number) :  Checks if value is greater than given number ex:  expect(10).toBeGreaterThan(5)
+
+Dom Matchers(jest-dom)
+- toBeInTheDocument() : Checks if the element is present in the DOM ex: expect(screen.getByText(/hello/i)).toBeInTheDocument()
+- toBeVisible(): Checks if the element is visible (not display: none, etc.) ex:expect(button).toBeVisible()
+- toBeDisabled():  Checks if a form control is disabled or not ex:expect(input).toBeDisabled()
+
+## React Testing Library (RTL) Queries
+- They are used to find elements in the component
+
+To find single element on page we have ,
+- getBy... - throws error if not found (synchronous
+- queryBy... - returns null if not found (synchronous)
+- findBy... -  waits for element (asynchronous)
+
+To find Multiple elements on page we have ,
+- getAllBy... - throws error if none found
+- queryAllBy... -  returns empty array if none found
+- findAllBy... - waits for all matching elements
+
+suffix can be
+
+- **getByRole()** - Most recommended – selects elements by ARIA role (like button, textbox). It also Supports options for matching by name, checked, disabled, etc.
+```
+// Match a button by role and name
+const button = screen.getByRole('button', { name: submit });
+
+// Match a checkbox
+const checkbox = screen.getByRole('checkbox', { name: accept terms });
+
+// Match a heading (h1)
+const heading = screen.getByRole('heading', { level: 1 });
+
+// The option name is used when matching an element by its visible accessible name, such as the label or inner text of an element.
+```
+
+- getByLabelText() - Selects input elements by their associated label text.
+```
+const input = screen.getByLabelText('Email');
+```
+- getByPlaceholderText() - Selects input by its placeholder value
+```
+const input = screen.getByPlaceholderText('Enter email');
+```
+- getByText() - 	Selects element by its visible text
+```
+const heading = screen.getByText('Welcome!');
+```
+- getByDisplayValue() - Selects input elements by the value they're displaying
+```
+const input = screen.getByDisplayValue('John Doe');
+```
+- getByAltText() - Selects elements (typically images) by their alt attribute.
+```
+const logo = screen.getByAltText('Company Logo');
+```
+- getByTitle() - Selects elements by their title attribute.
+```
+const closeButton = screen.getByTitle('Close');
+```
+- getByTestId() - Selects elements by their data-testid attribute.
+```
+const button = screen.getByTestId('submit-button');
+```
 
