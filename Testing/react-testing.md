@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/13dc313e-5180-474f-804e-be1994ee87c8)### JEST
+### JEST
 - It is a Javascript testing Framework. It is a test runner that finds the tests, runs the tests, determine whether the tests passed or failed and reports it back in a humam readable manner.
 
 ### React Testing Library
