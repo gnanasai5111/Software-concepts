@@ -282,10 +282,16 @@ export const server = setupServer(...handlers
 ```
 3. Add MSW to jest lifecycle
 ```
+// src/setupTests.ts
 import { server } from './mocks/server';
 
+// Start mock server before all tests
 beforeAll(() => server.listen());
+
+// Reset handlers between tests
 afterEach(() => server.resetHandlers());
+
+// Clean up after all tests
 afterAll(() => server.close());
 ```
 4.Usage
