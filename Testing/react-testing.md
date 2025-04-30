@@ -272,7 +272,7 @@ export const handlers = [
   }),
 ];
 ```
-2.setup MSW in your test environment
+2. **setup MSW in your test environment**
 ```
 // src/mocks/server.ts
 import { setupServer } from 'msw/node';
@@ -280,7 +280,7 @@ import { handlers } from './handlers';
 
 export const server = setupServer(...handlers
 ```
-3. Add MSW to jest lifecycle
+3. **Add MSW to jest lifecycle**
 ```
 // src/setupTests.ts
 import { server } from './mocks/server';
@@ -294,7 +294,7 @@ afterEach(() => server.resetHandlers());
 // Clean up after all tests
 afterAll(() => server.close());
 ```
-4.Usage
+4. **Usage**
 ```
 import { render, screen } from '@testing-library/react';
 import App from './App'; // Component that fetches /api/user
@@ -305,7 +305,7 @@ test('renders user data', async () => {
   expect(user).toBeInTheDocument();
 });
 ```
-5 Error Handling
+5. **Error Handling**
 ```
 import { server } from '../mocks/server';
 import { rest } from 'msw';
