@@ -201,6 +201,9 @@ function App() {
 - React shows a fallback UI and keeps other parts interactive.
 - When ready, React re-renders the suspended component without blocking the rest of the UI.
 
+## Code Splitting
+- Code splitting is the process of splitting your code into smaller bundles, which can be loaded on-demand rather than loading the entire app upfront. 
+
 ## Lazy Loading
 - Lazy Loading in React is the process of loading components only when they are needed, which helps in reducing the initial bundle size and improving performance.
 
