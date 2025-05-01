@@ -36,7 +36,7 @@ This comparison process is known as the **diffing algorithm**. It operates on:
 With React 16, the internal architecture was rewritten using **Fiber** to improve performance and responsiveness.
 
 #### Why Fiber?
-The previous "Stack Reconciler" was synchronous—meaning long-running updates (like large renders or heavy network requests) could block user interactions. **Fiber** solves this by:
+The previous Stack Reconciler in React was synchronous, meaning all updates (like rendering or network requests) had to be completed before React could process any other tasks, including user interactions. **Fiber** solves this by:
 - Splitting work into smaller *units of work* (fibers)
 - Allowing interruption, pausing, or cancellation of work
 - Prioritizing more important tasks (like animations or input events)
