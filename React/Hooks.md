@@ -324,4 +324,65 @@ export default App;
 
 ```
 
+## Custom Hooks
+- A custom hook is a JavaScript function whose name starts with use and can call other hooks. It allows you to reuse logic across multiple components.
 
+```
+import { useState, useEffect } from 'react';
+
+function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue);
+
+  const increment = () => setCount(c => c + 1);
+  const decrement = () => setCount(c => c - 1);
+  const reset = () => setCount(initialValue);
+
+  return { count, increment, decrement, reset };
+}
+
+function CounterComponent() {
+  const { count, increment, decrement, reset } = useCounter(10);
+
+  return (
+    <>
+      <p>Count: {count}</p>
+      <button onClick={increment}>➕</button>
+      <button onClick={decrement}>➖</button>
+      <button onClick={reset}>🔁</button>
+    </>
+  );
+}
+```
+**Fetch**
+
+```
+import { useState, useEffect } from 'react';
+
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let ignore = false;
+    async function fetchData() {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Fetch error");
+        const json = await res.json();
+        if (!ignore) setData(json);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+    return () => { ignore = true };
+  }, [url]);
+
+  return { data, loading, error };
+
+const { data, loading, error } = useFetch('https://api.example.com/users');
+
+```
