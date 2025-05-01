@@ -386,3 +386,85 @@ function useFetch(url) {
 const { data, loading, error } = useFetch('https://api.example.com/users');
 
 ```
+
+## useImperativeHandle
+- useImperativeHandle is a React Hook that lets you customize the handle exposed as a ref.
+
+```
+
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
+import { TextInput, View, StyleSheet } from "react-native";
+
+const NotesInput = forwardRef((props, ref) => {
+  const inputRef = useRef<TextInput>(null);
+  const [text, setText] = useState("");
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current?.focus();
+    },
+    clear: () => {
+      setText("");
+    },
+    getText: () => {
+      return text;
+    },
+  }));
+
+  return (
+    <View style={styles.container}>
+      <TextInput
+        ref={inputRef}
+        value={text}
+        onChangeText={setText}
+        placeholder="Write your notes here"
+        multiline
+        style={styles.input}
+      />
+    </View>
+  );
+});
+
+export default NotesInput;
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  input: {
+    height: 100,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 6,
+  },
+});
+
+import React, { useRef } from "react";
+import { View, Button } from "react-native";
+import NotesInput from "./NotesInput";
+
+const App = () => {
+  const notesRef = useRef<any>(null);
+
+  return (
+    <View style={{ padding: 20 }}>
+      <NotesInput ref={notesRef} />
+      <Button title="Focus" onPress={() => notesRef.current?.focus()} />
+      <Button title="Clear" onPress={() => notesRef.current?.clear()} />
+      <Button
+        title="Log Notes"
+        onPress={() => console.log(notesRef.current?.getText())}
+      />
+    </View>
+  );
+};
+
+export default App;
+
+```
