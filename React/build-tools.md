@@ -3,8 +3,8 @@
 - For example, code written in ES6+ JavaScript (or higher versions like TypeScript) may need to be transpiled into older JavaScript versions that are compatible with older browser
 
 Common tools for this are:
-**Babel**: Transpiles modern JavaScript (ES6+) or TypeScript into backwards-compatible JavaScript.
-**TypeScript Compiler (tsc)**: Compiles TypeScript files into JavaScript.
+- **Babel**: Transpiles modern JavaScript (ES6+) or TypeScript into backwards-compatible JavaScript.
+- **TypeScript Compiler (tsc)**: Compiles TypeScript files into JavaScript.
 
 ## Bundling
 - Bundling is the process of combining multiple files (e.g., JavaScript, CSS, images, etc.) into a single or smaller set of files to
