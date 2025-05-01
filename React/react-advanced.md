@@ -181,6 +181,7 @@ React’s scheduler ensures **high-priority tasks preempt** low-priority ones.
 ### ⏳ 8. **Suspense and Lazy Loading**
 
 **React Suspense** works hand-in-hand with Fiber and concurrent rendering to **defer rendering** until certain conditions are met (like loading data or dynamically imported components).
+Suspense is a feature in React that helps you manage asynchronous operations (like data fetching or code splitting) by delaying the rendering of a component until the required data or code is ready.
 
 ```jsx
 const LazyComponent = React.lazy(() => import('./MyComponent'));
@@ -199,5 +200,14 @@ function App() {
 - Fiber marks this subtree with a “suspended” status.
 - React shows a fallback UI and keeps other parts interactive.
 - When ready, React re-renders the suspended component without blocking the rest of the UI.
+
+## Lazy Loading
+- Lazy Loading in React is the process of loading components only when they are needed, which helps in reducing the initial bundle size and improving performance.
+
+## Memoization
+- Prevents unnecessary re-renders by memoizing components based on props.
+
+## Dynamic Imports
+- Dynamic imports in JavaScript are used to load modules asynchronously, which can be useful in React for code-splitting or lazy loading parts of an app only when needed.
 
 
