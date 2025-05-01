@@ -57,8 +57,8 @@ A zero-config bundler that works out of the box with smart defaults and parallel
 
 ### When to Use Which
 
-1 Webpack : Webpack is highly configurable and works well for complex projects where you need full control over the build process. 
-2 Vite : Fast development, modern stack (React/Vue/TS)
+1. Webpack : Webpack is highly configurable and works well for complex projects where you need full control over the build process. 
+2.  Vite : Fast development, modern stack (React/Vue/TS).
 3. Parcel :  Parcel is great for projects that need a simple, fast, and hassle-free setup. It's perfect for small to medium-sized
 applications where configuration complexity isn't required.
 
