@@ -161,9 +161,13 @@ React doesn't need to render everything in one go. With concurrent rendering, Re
 This helps keep apps **responsive**, even under load.
 
 #### 🔧 Key React APIs that enable concurrency:
-- `useTransition()` — lets you mark certain updates as “non-urgent” (e.g., search filtering).
-- `startTransition()` — wraps non-blocking updates.
-- `Suspense` — defers rendering part of the component tree while waiting (e.g., data fetching).
+- `useTransition()` — A React Hook that helps you handle non-urgent updates — like filtering a big list — without blocking the UI.
+```
+const [isPending, startTransition] = useTransition();
+//Also tells you if the update is still running (with isPending)
+```
+- `startTransition()` — A function that marks an update as low-priority so React can delay it if something more important
+- `Suspense` — Lets you pause rendering a component while waiting for something — like data or code to load.
 
 #### 🕹️ React Prioritizes:
 - User input → High Priority
