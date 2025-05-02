@@ -14,10 +14,6 @@ npx create-next-app@latest application-name
 - A file named page.tsx or page.jsx is required in each route folder.
 - Each folder represents a URL segment.
 
-## Layouts
-- Layouts in Next.js are used to define a shared structure (like headers, footers, navigation, etc.) for specific sections of your application.
-- A layout file is created with the name layout.tsx or layout.jsx and placed in the appropriate folder.
-
 ## Basic Routes
 ```
 app/
@@ -123,5 +119,54 @@ function NotFound() {
 }
 
 export default NotFound;
+```
+## File Colocation
+- File Colocation refers to the practice of placing related files (such as components, styles, and tests) together in the same folder to improve organization and maintainability.
+- You can use any file name (except page.tsx or page.ts) for other related files within the same URL segment folder.
+
+## Private Folders
+- Private folders are used to contain parts of your application that are not directly part of the public-facing route structure but may still be important for internal functionality (e.g., utilities, authentication, and helpers).Use underscore before a folder to make it as private folder
+```
+_lib
+```
+
+## Route Groups
+- Route groups allow you to logically group related routes without affecting the URL structure. This is helpful for organizing and structuring deeply nested routes.
+- Route groups are enclosed in parentheses () and it doesnt include in the url segment
+```
+(auth)
+```
+## Layouts
+- Layouts in Next.js are used to define a shared structure (like headers, footers, navigation, etc.) for specific sections of your application.
+- A layout file is created with the name layout.tsx or layout.jsx and placed in the appropriate folder.
+
+## Nested Layouts
+- Nested layouts allow you to define different layouts at different levels of the app, enabling you to have specific layouts for specific routes or sections.
+```
+app/
+├── layout.tsx           → Root layout, shared across the app
+├── page.tsx             → Root page, accessible at '/'
+├── dashboard/
+│   ├── layout.tsx       → Dashboard layout, shared across dashboard pages
+│   ├── page.tsx         → Dashboard homepage, accessible at '/dashboard'
+│   └── settings/
+│       └── layout.tsx   → Settings layout, shared across settings pages
+│       └── page.tsx     → Settings page, accessible at '/dashboard/settings'
 
 ```
+
+## Multiple Root Layouts
+- Next.js supports having multiple root layouts for different sections of your app.
+- This can be achieved using Route Groups which logically separate layouts into different categories while maintaining clean and organized routing.
+```
+app/
+├── (auth)/
+│   ├── layout.tsx       → auth-specific layout
+│   └── login.tsx      
+├── (app)/
+│   ├── layout.tsx       → app-specific layout
+│   └── page.tsx       
+
+```
+
+
