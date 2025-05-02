@@ -44,17 +44,7 @@ app/
         └── page.tsx → '/products/:productId'
 ```
 
-```
-import React from "react";
-
-function ProductDetails({ params }: { params: { productId: string } }) {
-  return <div>ProductDetails of product {params.productId}</div>;
-}
-
-export default ProductDetails;
-```
-
-Asynchronous Dynamic Routes
+Asynchronous Dynamic Routes(Server components)
 ```
 import React from "react";
 
@@ -186,5 +176,235 @@ app/
 │   └── page.tsx       
 
 ```
+
+## Metadata
+- Next.js (App Router) allows you to define metadata (like title, description etc.) for SEO and social sharing.
+-  Metadata can be set:
+1. Statically using the metadata object
+2. Dynamically using the generateMetadata function
+
+### Static Metadata
+- Define a metadata object at the top of a page.tsx or layout.tsx file.
+```
+export const metadata = {
+  title: "Home Page",
+  description: "Welcome to the home page!",
+};
+```
+
+###  Dynamic Metadata
+- Use generateMetadata to create metadata based on route params or fetched data.
+  
+```
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { productId: string };
+}): Promise<Metadata> {
+  const { productId } = await params;
+
+  return {
+    title: `Product - ${productId}`,
+    description: `Details of product with ID ${productId}`,
+  };
+}
+```
+- You can define a title using either a simple string, or a structured object with default, template, or absolute.
+- Default : Acts as a fallback title when no specific title is set by the page.
+- Template : Defines a reusable format (like prefix or suffix) for page titles.
+- Absolute: Ignores both default and template and sets the title exactly as specified.
+
+## Links
+- To to navigate between routes .
+```
+import Link from "next/link";
+
+<Link href="/about">About</Link>
+```
+
+## Active Link
+- Use usePathname() from next/navigation to determine the current path and apply styles accordingly.
+```
+"use client";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+
+const NavLink = ({ href, label }: { href: string; label: string }) => {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+
+  return (
+    <Link href={href} className={isActive ? "text-blue-500" : "text-gray-500"}>
+      {label}
+    </Link>
+  );
+};
+```
+
+## Programmatic Navigation
+- Use useRouter() from next/navigation to navigate manually.
+```
+"use client";
+import { useRouter } from "next/navigation";
+
+const Button = () => {
+  const router = useRouter();
+
+  const goToProduct = () => {
+    router.push("/products/123");
+  };
+
+  return <button onClick={goToProduct}>Go to Product</button>;
+};
+```
+
+## Params and search Params
+
+- In Next.js 15, both params and searchParams can be promises when passed to server components.
+
+```
+import { notFound } from "next/navigation";
+import React from "react";
+
+type props = {
+  params: Promise<{ productId: string }>;
+  searchParams: Promise<{ name: string }>;
+};
+
+async function ProductDetails({ params, searchParams }: props) {
+  const { productId } = await params;
+  const { name } =await searchParams;
+  if (parseInt(productId) > 1000) {
+    notFound();
+  }
+  return (
+    <div>
+      Product Details of product {productId} of name {name}
+    </div>
+  );
+}
+
+export default ProductDetails;
+```
+
+- In Client components , you can access by use from react
+- use() is the hook used to consume asynchronous data from a Promise (like params or searchParams), while keeping everything declarative.
+```
+"use client";
+import { notFound } from "next/navigation";
+import React, { use } from "react";
+
+type props = {
+  params: Promise<{ productId: string }>;
+  searchParams: Promise<{ name: string }>;
+};
+
+function ProductDetails({ params, searchParams }: props) {
+  const { productId } = use(params);
+  const { name } = use(searchParams);
+  if (parseInt(productId) > 1000) {
+    notFound();
+  }
+  return (
+    <div>
+      Product Details of product {productId} of name {name}
+    </div>
+  );
+}
+
+export default ProductDetails;
+```
+
+## useSearchParams()
+
+- You can also use this hook in client components to access search Params
+```
+const searchParams = useSearchParams();
+console.log(searchParams.get("name"))
+```
+
+## Templates
+- A template.tsx is like a layout.tsx but is re-rendered on every navigation instead of being persistent.
+- Use it when you want a fresh state for every route render (e.g., animations, modal resets).
+- File name: template.tsx or template.jsx.
+
+## Loading 
+- Used to show a loading indicator during suspense, including page.tsx, layout.tsx, or template.tsx
+- File: loading.tsx or loading.jsx
+- Can be a server or client component.
+
+## Error
+- Used to catch and display render or data-fetching errors for a specific segment.
+- File: error.tsx or error.jsx
+- Must be a client component.
+-  reset() is used to reattempt rendering the segment.
+
+```
+'use client';
+
+export default function Error({ error, reset }: { error: Error; reset: () => void }) {
+  return (
+    <div>
+      <h2>Error: {error.message}</h2>
+      <button onClick={reset}>Try again</button>
+    </div>
+  );
+}
+```
+
+## Parellel Routes
+- Its an advance routing mechanism that allows you to simultaneously or conditionally render one or more pages within the same layout.
+
+**Traditional Approach (Before Parallel Routes)** 
+```
+import React from 'react'
+function Dashboard() {
+  return (
+    <div>Dashboard</div>
+    <Users />
+    <Data />
+    <Photos />
+  )
+}
+export default Dashboard
+```
+**Slots** : Parallel routes are created using named slots. Slots are defined with the @folder convention. 
+For example, the following file structure defines three slots: @users,@photos and @data.
+- Slots are passed as props to the shared parent layout.
+- For the example above, the component in DashboardLayout now accepts the @users,@photos and @data slots props, and can render them in parallel alongside the children prop
+```
+/app/dashboard/layout.tsx
+/app/dashboard/page.tsx            → children
+/app/dashboard/@users/page.tsx    → users slot
+/app/dashboard/@data/page.tsx     → data slot
+/app/dashboard/@photos/page.tsx   → photos slot
+
+import React from "react";
+
+type DashboardProps = {
+  children: React.ReactNode;
+  users: React.ReactNode;
+  photos: React.ReactNode;
+  data: React.ReactNode;
+};
+
+function DashboardLayout({ children, users, photos, data }: DashboardProps) {
+  return (
+    <div>
+      {children}
+      {users}
+      {photos}
+      {data}
+    </div>
+  );
+}
+
+export default DashboardLayout;
+```
+
+
+
 
 
