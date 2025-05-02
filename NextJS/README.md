@@ -404,6 +404,92 @@ function DashboardLayout({ children, users, photos, data }: DashboardProps) {
 export default DashboardLayout;
 ```
 
+### unmatched Routes
+
+- Soft Navigation: During client-side navigation, Next.js will perform a partial render, changing the subpage within the slot, while maintaining the other slot's active subpages, even if they don't match the current URL.
+- Hard Navigation: After a full-page load (browser refresh), Next.js cannot determine the active state for the slots that don't match the current URL. Instead, it will render a default.js file for the unmatched slots, or 404 if default.js doesn't exist.
+
+**default.js** -You can define a default.js file to render as a fallback for unmatched slots during the initial load or full-page reload.
+
+
+- When using Parallel Routes in Next.js, nested routes inside a slot (like /dashboard/users/userDetails) can cause issues on hard reloads.
+- During soft navigation (via <Link>), all slots stay active.
+- But on hard refresh, Next.js tries to match the URL in each slot.If a slot (like @data or @photos) doesn’t match the current path, it throws a 404 — unless a default.tsx is provided.
+
+```
+/app/dashboard/@users/page.tsx          → users slot
+/app/dashboard/@users/userDetails/page.tsx → Nested Route
+/app/dashboard/@users/default.tsx       → fallback for users slot
+
+/app/dashboard/@data/page.tsx           → data slot
+/app/dashboard/@data/default.tsx        → fallback for data slot
+
+/app/dashboard/@photos/page.tsx         → photos slot
+/app/dashboard/@photos/default.tsx      → fallback for photos slot
+
+/app/dashboard/default.tsx              → fallback for children
+```
+
+## Conditional Routes
+
+- It lets you render slots based on conditions.
+
+```
+import React from "react";
+
+type DashboardProps = {
+  children: React.ReactNode;
+  users: React.ReactNode;
+  photos: React.ReactNode;
+  data: React.ReactNode;
+  login:React.ReactNode;
+};
+
+function DashboardLayout({ children, users, photos, data,login }: DashboardProps) {
+    const isLoggedIn=false;
+  return isLoggedIn ? <div>
+      {children}
+      {users}
+      {photos}
+      {data}
+    </div>: login
+}
+
+export default DashboardLayout;
+```
+
+## Intercepting routes
+- Intercepting routes allows you to load a route from another part of your application within the current layout.
+
+consider an example
+- For example, when clicking on a photo in a feed, you can display the photo in a modal, overlaying the feed. In this case, Next.js intercepts the /photo/123 route, masks the URL, and overlays it over /feed.
+- However, when navigating to the photo by clicking a shareable URL or by refreshing the page, the entire photo page should render instead of the modal. No route interception should occur.
+
+Conventions 
+- Intercepting routes can be defined with the (..) convention, which is similar to relative path convention ../ but for segments.
+1. (.) to match segments on the same level
+2. (..) to match segments one level above
+3. (..)(..) to match segments two levels above
+4. (...) to match segments from the root app directory
+
+```
+app
+├── feed
+│   ├── layout.js
+│   └── (..)photo
+│       └── [id]
+│           └── page.js         # Intercepted modal route for photo
+├── photo
+│   └── [id]
+│       └── page.js             # Full-page photo view (for hard navigation)
+├── layout.js
+└── page.js
+```
+
+- (..)photo/[id]/page.js: This route intercepts /photo/:id and renders it as a modal when accessed from /feed.
+- photo/[id]/page.js: Fallback full-page route if the user refreshes or directly lands on /photo/:id.
+  
+
 
 
 
