@@ -142,3 +142,15 @@ export async function GET(request: NextRequest) {
 }
 
 ```
+
+**Accessing Request Headers**
+```
+export async function GET(request: Request) {
+    const headers = request.headers;
+  
+    const userAgent = headers.get("user-agent");
+    const Authorization= headers.get("Authorization");
+  
+    return Response.json({ userAgent, Authorization });
+  }
+```
