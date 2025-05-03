@@ -104,7 +104,7 @@ export async function DELETE(
 ```
 
 **Query Params**
-````
+```
 
 // GET Handler for fetching comments.
 // If a query params `id` is present (`/comments?id=1`), it will return the comment with that specific ID.
@@ -145,8 +145,7 @@ export async function GET(request: NextRequest) {
 ```
 
 
-**accessing Request Headers**
-
+**Accessing Request Headers**
 ```
 export async function GET(request: Request) {
     const headers = request.headers;
@@ -155,5 +154,54 @@ export async function GET(request: Request) {
     const Authorization= headers.get("Authorization");
   
     return Response.json({ userAgent, Authorization });
+}
+
+// Alternative way
+import { NextRequest } from "next/server";
+
+export async function GET(request: NextRequest) {
+    const headers = new Headers(request.headers);
+  
+    const userAgent = headers.get("user-agent");
+    const Authorization= headers.get("Authorization");
+  
+    return Response.json({ userAgent, Authorization });
+}
+```
+
+**sending headers in the response**
+```
+  return new Response(
+  JSON.stringify(data), // ensure the body is a string
+  {
+    headers: { "Content-Type": "application/json" },
+    status: 201,
   }
+);
+```
+
+**accessing and setting cookie**
+```
+import { NextRequest } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const theme = request.cookies.get("theme");
+  console.log(theme);
+  return new Response("hello", {
+    headers: {
+      "Content-Type": "application/json",
+      "Set-Cookie": "theme=dark",
+    },
+  });
+}
+```
+
+**redirect**
+```
+import { redirect } from "next/navigation";
+
+export async function GET() {
+  // This will redirect to /login
+  redirect("/login");
+}
 ```
