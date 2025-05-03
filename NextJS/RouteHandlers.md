@@ -205,3 +205,29 @@ export async function GET() {
   redirect("/login");
 }
 ```
+
+## Middleware 
+- It lets you intercept and control the flow of requests and responses throughout the application
+- use middleware.ts file globally
+- It lets you specify paths where it should be active
+  1.Custom matcher config
+  2.Conditional statements
+
+```
+export const function middleware(request:NextRequest){
+    return NextResponse.redirect(new URL("/",request.url))
+}
+export const config={
+    matcher:"/profile"
+}
+
+// Other approach
+
+export const function middleware(request:NextRequest){
+    if(request.nextUrl.pathname==="/profile"){
+        return NextResponse.redirect(new URL("/",request.url))
+    }
+}
+
+
+```
