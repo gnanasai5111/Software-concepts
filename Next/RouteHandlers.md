@@ -123,4 +123,22 @@ export async function GET(request: Request) {
   return Response.json(comments);
 }
 
+// Alternative way
+import { NextRequest } from "next/server";
+import { comments } from "./comments";
+
+export async function GET(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id");
+
+  if (id) {
+    const comment = comments.find((comment) => comment.id === parseInt(id));
+    if (!comment) {
+      return Response.json({ message: "Comment not found" }, { status: 404 });
+    }
+
+    return Response.json(comment);
+  }
+  return Response.json(comments);
+}
+
 ```
