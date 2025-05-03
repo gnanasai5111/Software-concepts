@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 }
 ```
 
-** `/comments/[id]/route.ts` (Handles GET, PATCH, and DELETE for specific comment)**
+**Handles GET, PATCH, and DELETE for specific comment(`/comments/[id]/route.ts`)**
 ```
 import { comments } from "../comments";
 
