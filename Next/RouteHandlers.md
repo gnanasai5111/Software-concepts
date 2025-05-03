@@ -2,6 +2,7 @@
 - Route Handlers  are used to define custom API endpoints directly inside the app/ directory using the App Router.
 - You create them using special files like route.ts or route.js:
 
+**Folder Structure**
 ```
 app/
  comments/
@@ -9,13 +10,19 @@ app/
    [id]/
      route.ts       ← Handles `GET`, `PATCH`, and `DELETE` for specific comment
    comments.ts      ← contains comments data
+```
 
+**comments.ts**
+```
 export const comments = [
   { id: 1, text: "Good doing" },
   { id: 2, text: "Excellent Work" },
   { id: 3, text: "Fantastic" },
 ];
+```
 
+**GET , POST Requests**
+```
 import { comments } from "./comments";
 
 // GET - Fetch all comments
@@ -37,9 +44,10 @@ export async function POST(request: Request) {
     { headers: { "Content-Type": "application/json" }, status: 201 }
   );
 }
+```
 
-
-//  `/comments/[id]/route.ts` (Handles GET, PATCH, and DELETE for specific comment)
+** `/comments/[id]/route.ts` (Handles GET, PATCH, and DELETE for specific comment)**
+```
 import { comments } from "../comments";
 
 // GET - Fetch a single comment by ID
@@ -93,7 +101,10 @@ export async function DELETE(
 
   return Response.json({ message: "Deleted Successfully", ...deletedComment });
 }
+```
 
+**Query Params**
+````
 // GET Handler for fetching comments.
 // If a query params `id` is present (`/comments?id=1`), it will return the comment with that specific ID.
 // If no `id` is provided, it will return the full list of comments.
