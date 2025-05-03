@@ -105,6 +105,7 @@ export async function DELETE(
 
 **Query Params**
 ````
+
 // GET Handler for fetching comments.
 // If a query params `id` is present (`/comments?id=1`), it will return the comment with that specific ID.
 // If no `id` is provided, it will return the full list of comments.
@@ -143,7 +144,9 @@ export async function GET(request: NextRequest) {
 
 ```
 
-**Accessing Request Headers**
+
+**accessing Request Headers**
+
 ```
 export async function GET(request: Request) {
     const headers = request.headers;
