@@ -69,12 +69,23 @@ export async function generateStaticParams() {
 - So, Next.js will generate those 3 pages at build time, making them load very fast.
 
 ## dynamicParams
--Its Used in dynamic routes . It decides if other paths (not listed in generateStaticParams) should work.
+- Its Used in dynamic routes . It decides if other paths (not listed in generateStaticParams) should work.
 ```
 export const dynamicParams = true;
 ```
 - If its true, Any path will work and Page is rendered on-demand.
 - If its false, Only the paths in generateStaticParams will work and All other paths will return a 404 error.
+
+## Streaming
+- Streaming means sending parts of the HTML(chunks) to the browser as soon as they’re ready, instead of waiting for the whole page to be rendered on the server.
+- It’s useful for showing faster loading experiences (like loading spinners or shells) while the full content is still loading.
+```
+<Suspense fallback={<Loading />}>
+  <HeavyComponent />
+</Suspense>
+```
+
+
 
 
 
