@@ -26,3 +26,18 @@
 - During the build process (when deploying your app), the server generates static HTML files for all the pages.
 - When a user visits a page, they receive pre-built HTML, and no server-side processing is required to render the page.
 - JavaScript is downloaded after the page loads to make it interactive (like React's client-side hydration).
+
+## React Server Components(RSC)
+- React Server Components introduce a new way to build apps by splitting components into two types, each with different responsibilities.
+
+### Server components
+- Run only on the server.
+- Fetch data and prepare HTML before sending it to the browser.
+- Result in smaller client bundles.
+- Cannot handle user interactions or browser-specific logic (useState, useEffect, etc.).
+
+## Client Components
+- They run in the browser and also Handles all interactive logic like forms, buttons, animations, etc.
+- Can still receive an initial server-rendered HTML for faster page loads.
+- Must be marked with "use client" at the top of the file.
+
