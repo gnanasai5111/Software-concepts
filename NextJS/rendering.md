@@ -35,9 +35,46 @@
 - Fetch data and prepare HTML before sending it to the browser.
 - Result in smaller client bundles.
 - Cannot handle user interactions or browser-specific logic (useState, useEffect, etc.).
+- In next.js , components are server components by default.
 
 ## Client Components
 - They run in the browser and also Handles all interactive logic like forms, buttons, animations, etc.
 - Can still receive an initial server-rendered HTML for faster page loads.
 - Must be marked with "use client" at the top of the file.
+
+## Server Rendering strategies
+
+### Static Rendering
+- Static rendering refers to generating the HTML at build time on the server before any user requests are made.
+- Once generated, the HTML is cached and served as a static file for every user request, typically from a CDN.
+- The result is a highly optimized, fast-loading page that doesn't require additional processing on the server when it's requested.
+
+### Dynamic Rendering
+- Dynamic rendering refers to generating the HTML on each request (server-side), rather than at build time.
+- The content is rendered dynamically based on factors like the user’s request, session, or real-time data from a database or an API.
+
+## generateStaticParams
+- Used in dynamic routes to tell Next.js which pages to pre-render at build time.
+- Improves performance by generating HTML ahead of time.
+
+```
+export async function generateStaticParams() {
+  return [
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+  ];
+}
+```
+- So, Next.js will generate those 3 pages at build time, making them load very fast.
+
+## dynamicParams
+-Its Used in dynamic routes . It decides if other paths (not listed in generateStaticParams) should work.
+```
+export const dynamicParams = true;
+```
+- If its true, Any path will work and Page is rendered on-demand.
+- If its false, Only the paths in generateStaticParams will work and All other paths will return a 404 error.
+
+
 
