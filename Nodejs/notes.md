@@ -80,3 +80,23 @@ export default add;
 ```
 import add from './math.mjs';
 ```
+
+## Module Wrapper 
+- In Node.js, every file is treated as a separate module.
+- Before execution, Node wraps your code inside a function. This is known as the Module Wrapper Function.
+- This gives each file a private scope and access to special variables.
+```
+(function (exports, require, module, __filename, __dirname) {
+  // Your actual code lives here
+});
+```
+### Imediately Invoked Function Expression ((IIFE)
+- The module wrapper is an IIFE – a function that is defined and invoked immediately.
+- 
+**Parameters Injected by Node.js**
+  
+1. exports –  shortcut to module.exports for exporting data
+2. require – to import other modules
+3. module –  holds metadata and is used to export values
+4. __filename – the absolute path to the current file
+5.__dirname – the absolute path to the current directory
