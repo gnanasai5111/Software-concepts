@@ -25,3 +25,10 @@
 - ESM supports advanced features like tree shaking (removing unused code) and top-level await, and is now the preferred choice for writing modular, modern JavaScript.
 - To use ESM in Node.js, files need to have a .mjs extension or "type": "module" must be set in the package.json.
 -  While CommonJS is still widely used in legacy code, ES Modules are becoming the standard for future JavaScript development.
+
+## Modules
+- Modules are encapsulated and resusable chunks of code. Each File can be treated as a Module
+3 Types
+. Local Modules - Modules which we create in our application.
+2. Built-in Modules - Modlues which comes built-in with node js.
+3. Third party Modules - Modules which are written by other developers, which we can use.
