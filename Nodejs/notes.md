@@ -32,3 +32,51 @@
 . Local Modules - Modules which we create in our application.
 2. Built-in Modules - Modlues which comes built-in with node js.
 3. Third party Modules - Modules which are written by other developers, which we can use.
+
+
+**Common Js Named Export**
+``` 
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+
+module.exports = {
+  add,
+  subtract
+};
+```
+**Common Js Named Import**
+```
+const { add, subtract } = require('./math');
+```
+
+**Common Js Default Export**
+```
+const add = (a, b) => a + b;
+module.exports = add;
+```
+
+**Common Js Default Import**
+```
+const add = require('./math');
+```
+
+**ES MODULES Named Export** 
+``` 
+export const add = (a, b) => a + b;
+export const subtract = (a, b) => a - b;
+```
+**ES MODULES Named Import**
+```
+import { add, subtract } from './math.mjs';
+```
+
+**ES MODULES Default Export**
+```
+const add = (a, b) => a + b;
+export default add;
+```
+
+**ES MODULES Default Import**
+```
+import add from './math.mjs';
+```
