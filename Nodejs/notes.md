@@ -95,8 +95,8 @@ import add from './math.mjs';
 - 
 **Parameters Injected by Node.js**
   
-1. exports –  shortcut to module.exports for exporting data
-2. require – to import other modules
-3. module –  holds metadata and is used to export values
-4. __filename – the absolute path to the current file
-5.__dirname – the absolute path to the current directory
+1. exports –  shortcut to module.exports for exporting data.
+2. require – to import other modules.
+3. module –  holds metadata and is used to export values.
+4. __filename – the absolute path to the current file.
+5. __dirname – the absolute path to the current directory.
