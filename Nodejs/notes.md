@@ -100,3 +100,35 @@ import add from './math.mjs';
 3. module –  holds metadata and is used to export values.
 4. __filename – the absolute path to the current file.
 5. __dirname – the absolute path to the current directory.
+
+## Built-in modules
+- Modules that Node js comes with.
+
+1. Path Module
+- It provides utilities for working with file and directory paths.
+```
+const path = require('path');
+```
+**path.basename()**
+- It returns the last Portion of a path
+```
+path.basename('/foo/bar/baz.txt'); // 'baz.txt'
+```
+**path.extname()**
+- It returns the extension of the path
+```
+path.extname('/foo/bar/baz.txt'); // '.txt'
+```
+**path.join()**
+- Joins all given path segments together and normalizes the resulting path.
+```
+path.join('/foo', 'bar', 'baz.txt'); // '/foo/bar/baz.txt'
+```
+**path.resolve()**
+- Resolves a sequence of paths into an absolute path.
+- It Provides absolute path if no path starts with /.
+- If a path starts with /, it starts building from there.
+```
+path.resolve('foo', 'bar'); // '/current/working/dir/foo/bar'
+path.resolve('/foo', 'bar');// '/foo/bar'
+```
