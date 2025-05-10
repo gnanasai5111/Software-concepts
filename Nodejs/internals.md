@@ -52,8 +52,27 @@ Key fields:
 
 1. "name" – Project name
 2. "version" – Current version of your app
+### Versioning
+- It follows semantic versioning
+- Format is X.Y.Z
+
+- X Indicates MAJOR	Breaking changes
+- Y Indicates MINOR	New features, backward compatible
+- Z Indacates PATCH	Bug fixes only
+
 3. "description" – A short description
 4. "main" – Entry point file (e.g., index.js)
 5. "scripts" – Custom commands you can run using npm run
+```
+// Use them with: npm run <script-name>
+"scripts": {
+  "start": "node app.js",
+  "dev": "nodemon app.js",
+  "test": "jest"
+}
+```
+
 6. "dependencies" – Runtime packages
 7. "devDependencies" – Development-only packages
+
+
