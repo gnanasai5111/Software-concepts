@@ -214,3 +214,28 @@ const writable = fs.createWriteStream("output.txt");
 readable.pipe(writable);
 ```
 
+## HTTP
+- Hypertext Transfer Protocol (HTTP) is an application-layer protocol for transmitting hypermedia documents, such as HTML. It was designed for communication between web browsers and web servers.
+
+```
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    res.writeHead(200, { "Content-Type": "text/plain" }); 
+    res.write("Home Page");
+  } else if (req.url === "/about") {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.write("About Page");
+  } else {
+    res.statusCode = 404;
+    res.write("Page Not Found");
+  }
+  res.end();
+});
+
+server.listen(3000, () => {
+  console.log("Server is running on Port 3000");
+});
+```
+
