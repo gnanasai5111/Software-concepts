@@ -32,3 +32,28 @@ ex: File system operations (fs.readFile, fs.writeFile), CPU-intensive crypto (cr
 7. Callbacks in the micro task queues if present are executed. Again, first tasks in the nextTick queue and then tasks in the promise queue.
 8. All callbacks in the close queue are executed(e.g., socket.on('close'), stream.on('close'))
 9. For one final time in the same loop, the micro task queues are executed. nextTick queue followed by promise queue
+
+## NPM (Node Package Manager)
+- npm is the default package manager for Node.js.
+- It helps install, manage, and share JavaScript packages (modules).
+
+Common commands:
+1. npm init: Starts creating a package.json file (interactive).
+2. npm init -y: Creates a default package.json file.
+3. npm install <package>: Installs a package locally.
+4. npm install -g <package>: Installs globally.
+5. npm uninstall <package>: Removes a package.
+
+## package.json
+- A file that holds metadata about your project and its dependencies.
+- It is essential for every Node.js project.
+
+Key fields:
+
+1. "name" – Project name
+2. "version" – Current version of your app
+3. "description" – A short description
+4. "main" – Entry point file (e.g., index.js)
+5. "scripts" – Custom commands you can run using npm run
+6. "dependencies" – Runtime packages
+7. "devDependencies" – Development-only packages
