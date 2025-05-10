@@ -26,7 +26,7 @@ ex: File system operations (fs.readFile, fs.writeFile), CPU-intensive crypto (cr
 1. Any callbacks in the micro task queues are executed. First, tasks in the nextTick queue(process.nextTick() callbacks) and only then tasks in the promise queue(Promise callbacks (.then, .catch, .finally))
 2. All callbacks(setTimeout() and setInterval() callbacks) within the timer queue are executed.
 3. Callbacks in the micro task queues if present are executed. Again, first tasks in the nextTick queue and then tasks in the promise queue.
-4. All callbacks within the I/O queue are executed. (e.g., file system, sockets). I/O Polling: If there are no ready callbacks, the event loop waits/polls for I/O to complete before continuing.
+4. All callbacks within the I/O queue are executed. (e.g., file system, sockets).  If no I/O is ready yet, Node.js waits (polls) for a short time to check if any I/O gets completed before moving to the next step.
 5. Callbacks in the micro task queues if present are executed. nextTick queue followed by Promise queue.
 6. All callbacks in the check queue(setImmediate() callbacks) are executed. 
 7. Callbacks in the micro task queues if present are executed. Again, first tasks in the nextTick queue and then tasks in the promise queue.
