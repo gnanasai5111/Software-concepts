@@ -21,7 +21,7 @@ ex: File system operations (fs.readFile, fs.writeFile), CPU-intensive crypto (cr
 
 ![image](https://github.com/user-attachments/assets/88600b8c-2cdb-4049-8daa-99aecaad1b09)
 
-1. All callbacks in the micro task queues are executed. First, tasks in the nextTick queue(process.nextTick() callbacks) and only then tasks in the promise queue(Promise callbacks (.then, .catch, .finally))
+1. Any callbacks in the micro task queues are executed. First, tasks in the nextTick queue(process.nextTick() callbacks) and only then tasks in the promise queue(Promise callbacks (.then, .catch, .finally))
 2. All callbacks(setTimeout() and setInterval() callbacks) within the timer queue are executed.
 3. Callbacks in the micro task queues if present are executed. Again, first tasks in the nextTick queue and then tasks in the promise queue.
 4. All callbacks within the I/O queue are executed. (e.g., file system, sockets)
