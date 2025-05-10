@@ -20,3 +20,13 @@ ex: File system operations (fs.readFile, fs.writeFile), CPU-intensive crypto (cr
 - Since Node js is a single threaded language, event loop manages all the asynchronous operations by using thread pool or  by offloading operations to the system kernel whenever possible.
 
 ![image](https://github.com/user-attachments/assets/88600b8c-2cdb-4049-8daa-99aecaad1b09)
+
+1. All callbacks in the micro task queues are executed. First, tasks in the nextTick queue(process.nextTick() callbacks) and only then tasks in the promise queue(Promise callbacks (.then, .catch, .finally))
+2. All callbacks(setTimeout() and setInterval() callbacks) within the timer queue are executed.
+3. Callbacks in the micro task queues if present are executed. Again, first tasks in the nextTick queue and then tasks in the promise queue.
+4. All callbacks within the I/O queue are executed. (e.g., file system, sockets)
+5. Callbacks in the micro task queues if present are executed. nextTick queue followed by Promise queue.
+6. All callbacks in the check queue(setImmediate() callbacks) are executed. 
+7. Callbacks in the micro task queues if present are executed. Again, first tasks in the nextTick queue and then tasks in the promise queue.
+8. All callbacks in the close queue are executed(e.g., socket.on('close'), stream.on('close'))
+9. For one final time in the same loop, the micro task queues are executed. nextTick queue followed by promise queue
