@@ -75,4 +75,10 @@ Key fields:
 6. "dependencies" – Runtime packages
 7. "devDependencies" – Development-only packages
 
+- For publishing npm package use
+```
+npm login //Enter login details
+npm publish
+```
+
 
