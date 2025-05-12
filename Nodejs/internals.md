@@ -134,9 +134,11 @@ if (cluster.isMaster) {
 ```
 
 ## Worker Threads Module
-- Worker Threads allow you to run JavaScript code in parallel within a single Node.js process.
+- Worker Threads allow you to run JavaScript in parallel within the same Node.js process using multiple threads.
 - It is useful for CPU-intensive tasks like image processing, large data parsing, or complex calculations.
-- when process isolation is not needed,that is, no seperate instance of v8,event loop and memory are needed, you should use worker_threads.
+- Each worker has its own event loop, call stack, and memory, but shares the same V8 instance as the main thread.
+- Communication between main thread and workers happens via message passing (postMessage / on('message')).
+- Optionally, SharedArrayBuffer can be used for shared memory.
 
 **main-thread.js**
 ```
