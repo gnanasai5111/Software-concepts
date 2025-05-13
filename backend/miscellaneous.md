@@ -51,4 +51,37 @@ Protocol                 Port
 - **PATCH**  : Partially update resource
 - **DELETE** : Delete resource
 
+## HTTP Headers
+- HTTP Headers are key-value pairs sent with every HTTP request and response.
+- They provide metadata such as content type, authorization, and caching info.
+- Headers help the client and server understand how to handle the request/response.
+
+
+```
+const axios = require('axios');
+
+// Making a GET request with custom request headers and handling response headers
+axios.get('https://example.com/api', {
+  headers: {
+    'Authorization': 'Bearer my-token', // Custom request header
+    'Custom-Header': 'CustomHeaderValue' // Another custom header
+  }
+})
+  .then(response => {
+    // Accessing response headers, such as Set-Cookie
+    console.log('Response Data:', response.data);
+
+    // Accessing Set-Cookie header from the response
+    const cookies = response.headers['set-cookie'];
+    console.log('Set-Cookie:', cookies); // Logs the cookies set by the server
+
+    // Accessing other response headers
+    console.log('Content-Type:', response.headers['content-type']);
+    console.log('X-Request-ID:', response.headers['x-request-id']);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+```
+
 
