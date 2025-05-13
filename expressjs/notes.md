@@ -162,7 +162,7 @@ app.get('/search?id=1', (req, res) => {
 ```
 
 ## Express Router
-- Routers help split your app into modular files. Great for scalability.
+- Express.Router is a built-in middleware and mini-app in Express used to organize routes into separate files or modules. It helps keep your main server file clean and makes your app modular, scalable, and easier to maintain.
 
 ### `userRoutes.js`
 
@@ -199,9 +199,10 @@ app.listen(3000, () => {
 
 ```
 app.use(express.static('public'));
+(or)
+app.use(express.static(path.join(__dirname, 'public')));
 ```
 
-`public/index.html` will be served when hitting `/`
 
 
 
