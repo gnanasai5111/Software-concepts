@@ -84,4 +84,35 @@ axios.get('https://example.com/api', {
   });
 ```
 
+## Status codes
+- HTTP response status code indicate whether the specific HTTP request has been successfully completed.
+
+1. Informational responses (100 – 199)
+2. Successful responses (200 – 299)
+3. Redirection messages (300 – 399)
+4. Client error responses (400 – 499)
+5. Server error responses (500 – 599)
+
+* **200 OK** – Standard success for GET/POST requests.
+* **201 Created** – A resource has been successfully created (commonly used with POST).
+* **204 No Content** – Request succeeded, but no content is returned.
+* **301 Moved Permanently** – Resource has been permanently moved to a new URL.
+* **302 Found** – Temporary redirect to another URL.
+* **304 Not Modified** – Used for caching. Resource hasn't changed since the last request.
+* **400 Bad Request** – Malformed syntax or invalid request from the client.
+* **401 Unauthorized** – Authentication is required to access the resource.
+* **403 Forbidden** – Client is authenticated but not authorized to access the resource.
+* **404 Not Found** – The requested resource does not exist on the server.
+* **409 Conflict** – Request conflicts with current server state (e.g., duplicate entry).
+* **422 Unprocessable Entity** – Server understands the request but can't process it (common for validation errors).
+* **500 Internal Server Error** – A generic server-side error occurred.
+* **502 Bad Gateway** – Server received an invalid response from an upstream server.
+* **503 Service Unavailable** – Server is temporarily down or overloaded.
+* **504 Gateway Timeout** – The upstream server failed to respond in time.
+
+
+
+
+
+
 
