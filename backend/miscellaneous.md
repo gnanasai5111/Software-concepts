@@ -41,6 +41,9 @@ Protocol                 Port
 1. **Stateless** : Each request is independent and  No session stored between requests.
 2. **Resource-based** : Everything is treated as a resource (user, product, etc.).
 3. **Uses standard HTTP methods** : GET, POST, PUT, PATCH, DELETE, etc.
+4. **Client-Server** : Separation of frontend (client) and backend (server).
+5. **Cacheable** : Responses can be cached to improve performance.
+6. **Uniform Interface** : All resources are accessed using a consistent approach.
 
 - **GET**    : GET the data       
 - **POST**   : Create new data      
