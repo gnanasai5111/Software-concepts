@@ -18,21 +18,118 @@ app.listen(3000, () => {
 ```
 
 ## Middleware in Express
-- Middleware functions are functions that have access to `req`, `res`, and `next()`.
+- Middleware in Express.js is a function that has access to the request (req), response (res), and the next middleware function (next) in the request-response cycle.
+- Middleware acts like a pipeline for each HTTP request . It can modify the request and response objects, end the request-response cycle, or call the next middleware function or handle errors.
+
+### Middleware Function Signature
 
 ```
+function middlewareName(req, res, next) {
+  // do something
+  next(); // Pass control to the next middleware
+}
+```
+
+## Types of Middleware
+
+### 1. Application-level Middleware
+- Applies to the whole app.
+
+```
+const express = require('express');
+const app = express();
+
+// Logging middleware
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
+  next(); // Pass to next middleware/route
+});
+```
+
+You can also apply it only to specific routes:
+
+```
+app.use('/admin', (req, res, next) => {
+  console.log('Admin access');
   next();
 });
 ```
 
-## Built-in middleware:
+### 2. Built-in Middleware
+
+#### `express.json()` – Parses incoming JSON
 
 ```
-app.use(express.json()); // To parse JSON in POST requests
-app.use(express.urlencoded({ extended: true })); // For form data
+app.use(express.json());
 ```
+
+#### `express.urlencoded()` – Parses form data
+
+```
+app.use(express.urlencoded({ extended: true }));
+```
+
+#### `express.static()` – Serves static files
+
+```
+app.use(express.static('public'));
+```
+
+---
+
+### 3. Router-level Middleware
+- Used with an Express Router.
+
+```
+const router = require('express').Router();
+
+router.use((req, res, next) => {
+  console.log('Time:', Date.now());
+  next();
+});
+
+router.get('/', (req, res) => {
+  res.send('Home from router');
+});
+
+module.exports = router;
+```
+
+In `index.js`:
+
+```
+const userRouter = require('./routes/userRouter');
+app.use('/users', userRouter);
+```
+
+### 4. Error-handling Middleware
+
+Defined with **4 parameters**: `(err, req, res, next)`
+
+```
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+Use it after all routes and other middleware.
+
+
+### 5. Third-party Middleware
+
+```
+npm install morgan
+```
+
+```
+const morgan = require('morgan');
+app.use(morgan('dev'));
+```
+
+
+
+
 
 ## Routing in Express
 
@@ -106,12 +203,5 @@ app.use(express.static('public'));
 
 `public/index.html` will be served when hitting `/`
 
-## Error Handler Middleware
-
-```
-app.use((err, req, res, next) => {
-  res.status(500).send('Internal Server Error');
-});
-```
 
 
