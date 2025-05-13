@@ -38,7 +38,7 @@ Protocol                 Port
 ## REST API
 - REST stands for Representational State Transfer.
 - A design pattern or architectural style for creating APIs over HTTP.
-1. **Stateless** : Each request is independent and  No session stored between requests.
+1. **Stateless** : Each request is independent and Each request should have all the info needed (server doesn’t remember anything between requests)
 2. **Resource-based** : Everything is treated as a resource (user, product, etc.).
 3. **Uses standard HTTP methods** : GET, POST, PUT, PATCH, DELETE, etc.
 4. **Client-Server** : Separation of frontend (client) and backend (server).
