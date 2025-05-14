@@ -14,7 +14,7 @@
 
 ## MongoDB Command Notes
 
-### Basic Commands
+### **Basic Commands**
 
 1. **View all databases**
 
@@ -39,8 +39,6 @@ db
 ```
 db.dropDatabase()
 ```
-
----
 
 ### **Collections**
 
@@ -74,7 +72,7 @@ db.comments.find()
 
 9. **Find a single document**
 
-```
+```js
 db.comments.findOne({ name: "soil" })
 ```
 
@@ -113,34 +111,30 @@ db.comments.updateOne(
   { name: "soil" },
   { $set: { name: "Grame", age: 29 } }
 )
+```
 
-// Update the document, but if not found insert it:
-db.posts.updateOne( 
-  { title: "Post Title 5" }, 
-  {
-    $set: 
-      {
-        title: "Post Title 5",
-        body: "Body of post.",
-        category: "Event",
-        likes: 5,
-        tags: ["news", "events"],
-        date: Date()
-      }
-  }, 
-  { upsert: true }
+15. **Update many documents**
+
+```
+db.comments.updateMany(
+  { age: { $lt: 30 } },
+  { $set: { verified: true } }
 )
 ```
 
-15. **Delete a document**
+16. **Delete one document**
 
 ```
-db.comments.remove({ name: "soil" }) // deprecated
-// or use
 db.comments.deleteOne({ name: "soil" })
 ```
 
-16. **Increment a field**
+17. **Delete many documents**
+
+```
+db.comments.deleteMany({ age: { $lt: 20 } })
+```
+
+18. **Increment a field**
 
 ```
 db.comments.update(
@@ -149,7 +143,7 @@ db.comments.update(
 )
 ```
 
-17. **Rename a field**
+19. **Rename a field**
 
 ```
 db.comments.update(
@@ -158,46 +152,77 @@ db.comments.update(
 )
 ```
 
----
-
 ### **Query Operators**
 
-18. **Comparison operators**
+20. **Comparison operators**
 
 ```
-db.comments.find({ age: { $lt: 25 } })       // Less than
-db.comments.find({ age: { $lte: 25 } })      // Less than or equal
-db.comments.find({ age: { $gt: 25 } })       // Greater than
-db.comments.find({ age: { $gte: 25 } })      // Greater than or equal
-db.comments.find({ age: { $ne: 25 } })       // Not equal
-db.comments.find({ age: { $in: [25, 30] } }) // In list
-db.comments.find({ age: { $nin: [20, 22] } })// Not in list
+db.comments.find({ age: { $eq: 25 } })         // Equal
+db.comments.find({ age: { $ne: 25 } })         // Not equal
+db.comments.find({ age: { $gt: 25 } })         // Greater than
+db.comments.find({ age: { $gte: 25 } })        // Greater than or equal
+db.comments.find({ age: { $lt: 25 } })         // Less than
+db.comments.find({ age: { $lte: 25 } })        // Less than or equal
+db.comments.find({ age: { $in: [25, 30] } })   // In array
+db.comments.find({ age: { $nin: [20, 22] } })  // Not in array
 ```
 
----
+21. **Logical operators**
+
+```
+db.comments.find({
+  $and: [{ age: { $gt: 20 } }, { age: { $lt: 30 } }]
+}) // Both conditions must match
+
+db.comments.find({
+  $or: [{ name: "soil" }, { age: 25 }]
+}) // Either condition matches
+
+db.comments.find({
+  $nor: [{ name: "soil" }, { age: 25 }]
+}) // Neither condition matches
+
+db.comments.find({
+  age: { $not: { $gt: 25 } }
+}) // Does not match the condition
+```
+
+22. **Evaluation operators**
+
+```
+db.comments.find({ name: { $regex: /soil/i } })     // Regex match (case-insensitive)
+
+db.comments.find({ $text: { $search: "soil" } })     // Full-text search (requires text index)
+
+db.comments.find({
+  $where: function () {
+    return this.age > 25 && this.name === "soil"
+  }
+}) // JavaScript expression
+```
 
 ### **Extra Useful Commands**
 
-19. **Sort**
+23. **Sort**
 
 ```
 db.comments.find().sort({ age: 1 })  // Ascending
 db.comments.find().sort({ age: -1 }) // Descending
 ```
 
-20. **Projection (select specific fields)**
+24. **Projection (select specific fields)**
 
 ```
 db.comments.find({}, { name: 1, _id: 0 })
 ```
 
-21. **Regex search**
+25. **Regex search**
 
 ```
 db.comments.find({ name: /soil/i })
 ```
 
-22. **Aggregation (example)**
+26. **Aggregation (example)**
 
 ```
 db.comments.aggregate([
@@ -210,4 +235,6 @@ db.comments.aggregate([
   }
 ])
 ```
+
+
 
