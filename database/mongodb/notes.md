@@ -113,6 +113,23 @@ db.comments.updateOne(
   { name: "soil" },
   { $set: { name: "Grame", age: 29 } }
 )
+
+// Update the document, but if not found insert it:
+db.posts.updateOne( 
+  { title: "Post Title 5" }, 
+  {
+    $set: 
+      {
+        title: "Post Title 5",
+        body: "Body of post.",
+        category: "Event",
+        likes: 5,
+        tags: ["news", "events"],
+        date: Date()
+      }
+  }, 
+  { upsert: true }
+)
 ```
 
 15. **Delete a document**
