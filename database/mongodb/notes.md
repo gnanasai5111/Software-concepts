@@ -236,5 +236,90 @@ db.comments.aggregate([
 ])
 ```
 
+### MongoDB Indexing Notes
+- Indexes in MongoDB make search queries faster. Without indexes, MongoDB scans every document in a collection.
+
+
+### Types of Indexes
+
+### **1. Default `_id` Index**
+
+Every document has an automatic index on the `_id` field.
+
+```
+db.comments.find({ _id: ObjectId("...") })
+```
+
+### **2. Single Field Index**
+
+Speeds up queries on one field.
+
+```
+db.comments.createIndex({ name: 1 }) // 1 for ascending, -1 for descending
+```
+
+✅ Good for:
+
+```
+db.comments.find({ name: "soil" })
+```
+
+### **3. Compound Index**
+
+Index on multiple fields. Follows **left-to-right** rule.
+
+```
+db.comments.createIndex({ name: 1, age: 1 })
+```
+
+✅ Works for:
+
+```
+db.comments.find({ name: "soil" })
+db.comments.find({ name: "soil", age: 25 })
+```
+
+⚠️ Not optimal for:
+
+```
+db.comments.find({ age: 25 }) // Order matters
+```
+
+### **4. Text Index**
+
+Used for full-text search on strings.
+
+```
+db.comments.createIndex({ name: "text", description: "text" })
+```
+
+✅ Search:
+
+```
+db.comments.find({ $text: { $search: "soil" } })
+```
+
+### Extra Index Commands**
+
+#### **View Indexes**
+
+```
+db.comments.getIndexes()
+```
+
+### **Drop Index**
+
+```
+db.comments.dropIndex("name_1") // Use the index name from getIndexes()
+```
+
+### **Drop All Indexes**
+
+```
+db.comments.dropIndexes()
+```
+
+
+
 
 
