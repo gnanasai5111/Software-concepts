@@ -2,19 +2,18 @@
 
 Mongoose is an **ODM (Object Data Modeling)** library for MongoDB and Node.js, providing a straightforward way to interact with MongoDB databases. It allows you to define schemas and models for your data, making it easier to handle data validation, relationships, and queries.
 
----
 
 ### **1. Setting up Mongoose**
 
 #### **Install Mongoose**:
 
-```bash
+```
 npm install mongoose
 ```
 
 #### **Connecting to MongoDB**:
 
-```js
+```
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/yourDB', {
@@ -30,15 +29,13 @@ mongoose.connect('mongodb://localhost:27017/yourDB', {
   * Replace `'mongodb://localhost:27017/yourDB'` with your actual MongoDB URI.
   * `useNewUrlParser` and `useUnifiedTopology` are options to handle MongoDB's internal connection logic.
 
----
-
 ### **2. Mongoose Schema and Model**
 
 #### **Schema**:
 
 A schema is the structure of the data in MongoDB, defining what data fields are required and their data types.
 
-```js
+```
 const mongoose = require('mongoose');
 
 // Define a schema
@@ -62,40 +59,22 @@ const Comment = mongoose.model('Comment', commentSchema);
 
 * **Explanation**: `mongoose.model()` creates a model based on the schema, which is then used to interact with the `comments` collection.
 
----
-
 ### **3. CRUD Operations with Mongoose**
 
 #### **Create**:
+```
+// Create single
+const comment = new Comment({ name: 'Alice', age: 25, message: 'Hello' });
+await comment.save();
 
-* **Single Document**:
-
-```js
-const newComment = new Comment({
-  name: 'Alice',
-  age: 25,
-  message: 'Great post!'
-});
-
-newComment.save()
-  .then(comment => console.log('Comment saved:', comment))
-  .catch(err => console.error('Error saving comment:', err));
+// Create multiple
+await Comment.insertMany([
+  { name: 'Bob', age: 30, message: 'Hi' },
+  { name: 'Charlie', age: 35, message: 'Yo' }
+]);
 ```
 
-* **Multiple Documents**:
 
-```js
-const comments = [
-  { name: 'Alice', age: 25, message: 'Great post!' },
-  { name: 'Bob', age: 30, message: 'Nice article!' }
-];
-
-Comment.insertMany(comments)
-  .then(result => console.log('Comments added:', result))
-  .catch(err => console.error('Error adding comments:', err));
-```
-
----
 
 #### **Read**:
 
@@ -109,69 +88,65 @@ Comment.find()
 
 * **Find Documents with Conditions**:
 
-```js
-Comment.find({ age: { $gte: 25 } })
-  .then(comments => console.log('Comments with age >= 25:', comments))
-  .catch(err => console.error('Error fetching comments:', err));
 ```
+// All documents
+await Comment.find();
 
-* **Find a Single Document**:
+// With condition
+await Comment.find({ age: { $gte: 25 } });
 
-```js
-Comment.findOne({ name: 'Alice' })
-  .then(comment => console.log('Found comment:', comment))
-  .catch(err => console.error('Error finding comment:', err));
+// Find one
+await Comment.findOne({ name: 'Alice' });
+
+// Find by ID
+await Comment.findById('652fbdc84564c63b37b0e0d9');
+
+// Project specific fields
+await Comment.find({}, { name: 1, age: 1 });
+
+// Chained query
+await Comment.find({ age: { $lt: 30 } }).limit(5).sort({ age: -1 });
+
 ```
-
-* **Find and Return Specific Fields**:
-
-```js
-Comment.find({ age: { $gte: 25 } }, { name: 1, age: 1 })
-  .then(comments => console.log('Comments (name, age only):', comments))
-  .catch(err => console.error('Error fetching comments:', err));
-```
-
----
 
 #### **Update**:
+```
+// Update one
+await Comment.updateOne({ name: 'Alice' }, { $set: { age: 26 } });
 
-* **Update One Document**:
+// Update many
+await Comment.updateMany({ age: { $lt: 30 } }, { $set: { message: 'Updated' } });
 
-```js
-Comment.updateOne({ name: 'Alice' }, { $set: { age: 26 } })
-  .then(result => console.log('Update result:', result))
-  .catch(err => console.error('Error updating comment:', err));
+// findOneAndUpdate
+await Comment.findOneAndUpdate(
+  { name: 'Bob' },
+  { $set: { age: 40 } },
+  { new: true }
+);
+
+// findByIdAndUpdate
+await Comment.findByIdAndUpdate(
+  '652fbdc84564c63b37b0e0d9',
+  { $set: { age: 50 } },
+  { new: true }
+);
 ```
 
-* **Update Many Documents**:
-
-```js
-Comment.updateMany({ age: { $gte: 30 } }, { $set: { message: 'Updated message' } })
-  .then(result => console.log('Updated many comments:', result))
-  .catch(err => console.error('Error updating comments:', err));
-```
-
----
 
 #### **Delete**:
-
-* **Delete One Document**:
-
-```js
-Comment.deleteOne({ name: 'Alice' })
-  .then(result => console.log('Deleted comment:', result))
-  .catch(err => console.error('Error deleting comment:', err));
 ```
+// Delete one
+await Comment.deleteOne({ name: 'Charlie' });
 
-* **Delete Many Documents**:
+// Delete many
+await Comment.deleteMany({ age: { $gt: 35 } });
 
-```js
-Comment.deleteMany({ age: { $lte: 25 } })
-  .then(result => console.log('Deleted many comments:', result))
-  .catch(err => console.error('Error deleting comments:', err));
+// findOneAndDelete
+await Comment.findOneAndDelete({ name: 'Bob' });
+
+// findByIdAndDelete
+await Comment.findByIdAndDelete('652fbdc84564c63b37b0e0d9');
 ```
-
----
 
 ### **4. Mongoose Validation**
 
