@@ -152,9 +152,26 @@ db.comments.update(
 )
 ```
 
+20. **Push item to array**
+
+```
+db.comments.updateOne(
+  { name: "soil" },
+  { $push: { tags: "organic" } }
+)
+```
+21. **Pop item from array**
+
+```
+db.comments.updateOne(
+  { name: "soil" },
+  { $pop: { tags: "organic" } }
+)
+```
+
 ### **Query Operators**
 
-20. **Comparison operators**
+22. **Comparison operators**
 
 ```
 db.comments.find({ age: { $eq: 25 } })         // Equal
@@ -167,7 +184,7 @@ db.comments.find({ age: { $in: [25, 30] } })   // In array
 db.comments.find({ age: { $nin: [20, 22] } })  // Not in array
 ```
 
-21. **Logical operators**
+23. **Logical operators**
 
 ```
 db.comments.find({
@@ -187,7 +204,7 @@ db.comments.find({
 }) // Does not match the condition
 ```
 
-22. **Evaluation operators**
+24. **Evaluation operators**
 
 ```
 db.comments.find({ name: { $regex: /soil/i } })     // Regex match (case-insensitive)
@@ -203,26 +220,26 @@ db.comments.find({
 
 ### **Extra Useful Commands**
 
-23. **Sort**
+25. **Sort**
 
 ```
 db.comments.find().sort({ age: 1 })  // Ascending
 db.comments.find().sort({ age: -1 }) // Descending
 ```
 
-24. **Projection (select specific fields)**
+26. **Projection (select specific fields)**
 
 ```
 db.comments.find({}, { name: 1, _id: 0 })
 ```
 
-25. **Regex search**
+27. **Regex search**
 
 ```
 db.comments.find({ name: /soil/i })
 ```
 
-26. **Aggregation (example)**
+28. **Aggregation (example)**
 
 ```
 db.comments.aggregate([
