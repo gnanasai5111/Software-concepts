@@ -299,7 +299,7 @@ db.comments.createIndex({ name: "text", description: "text" })
 db.comments.find({ $text: { $search: "soil" } })
 ```
 
-### Extra Index Commands**
+### Extra Index Commands
 
 #### **View Indexes**
 
