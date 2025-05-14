@@ -240,6 +240,8 @@ db.comments.find({ name: /soil/i })
 ```
 
 28. **Aggregation (example)**
+- Aggregation operations allow you to group, sort, perform calculations, analyze data, and much more.
+- Aggregation pipelines can have one or more "stages". The order of these stages are important. Each stage acts upon the results of the previous stage.
 
 ```
 db.comments.aggregate([
