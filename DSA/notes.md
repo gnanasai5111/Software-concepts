@@ -24,6 +24,12 @@
 - Describes the exact (tight) bound – both upper and lower – of time/space in average scenarios.
 - Means the algorithm always takes roughly this amount of time or space.
 
+**Common Time Complexities**
+- O(1): Constant time – doesn’t depend on input size.
+- O(log n): Logarithmic time – Each step reduces the problem size by half.
+- O(n): Linear time – Execution time increases directly with input size.
+- O(n²): Quadratic time – Time increases with square of input size. nested loops, slow on large inputs.
+
 
 
 ## 📘 Common Patterns in Data Structures & Algorithms
