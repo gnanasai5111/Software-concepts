@@ -1,4 +1,32 @@
-# 📘 Common Patterns in Data Structures & Algorithms
+# DataStructures
+- A Data Structure is a way of organizing and storing data so that it can be accessed and modified efficiently.
+
+### Types of Data Structures
+1. Linear Data Structure : Data elements are arranged sequentially (Arrays, LinkedList, Stacks, Queues).
+2. Non Linear Data Structure : Data elements are arranged in a hierarchical or interconnected manner (Trees, Graphs).
+
+#### Time Complexity and Space Complexity
+1. **Time Complexity** - Time complexity measures how the runtime of an algorithm grows relative to the size of its input.
+2. **Space Complexity** - Space complexity measures the amount of extra memory an algorithm needs relative to input size n.
+
+####  Asymptotic Notations
+- To analyze Time and Space Complexities, we use Asymptotic Notations:
+  
+##### Big O Notation (O) – Worst Case
+- Describes the upper bound of an algorithm.
+- Represents the maximum time or space the algorithm will take.
+
+##### Omega Notation (Ω) – Best Case
+- Describes the lower bound of an algorithm.
+- Represents the minimum time or space required for the best-case scenario.
+
+##### Theta Notation (Θ) – Average Case (Tight Bound)
+- Describes the exact (tight) bound – both upper and lower – of time/space in average scenarios.
+- Means the algorithm always takes roughly this amount of time or space.
+
+
+
+## 📘 Common Patterns in Data Structures & Algorithms
 
 This guide categorizes essential LeetCode problems by common patterns used in technical interviews.
 
