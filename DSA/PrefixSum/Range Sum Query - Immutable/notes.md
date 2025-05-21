@@ -26,12 +26,15 @@ numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
  
 **Constraints**:
 
-1 <= nums.length <= 104
--105 <= nums[i] <= 105
-0 <= left <= right < nums.length
-At most 104 calls will be made to sumRange.
+-> 1 <= nums.length <= 104
+-> -105 <= nums[i] <= 105
+-> 0 <= left <= right < nums.length
+-> At most 104 calls will be made to sumRange.
 
 ## Brute Force
+
+- Copy the given array into a global array.
+- For each sumRange(left, right) call, traverse the range and calculate the sum manually.
 
 ```
 class NumArray {
@@ -59,8 +62,14 @@ class NumArray {
  */
 ```
 
+**Time Complexity** - O(N) in constructor, and O(N) for each sumRange call
+**Space Complexity** - O(N)
+
 
 ## Prefix sum
+
+- When we build the preSum array, we do this: preSum[i] stores the sum of all elements from index 0 to i - 1.
+- If we want to find the sum from index left to right, we don’t need to loop — we can subtract the sum before left from the sum before right + 1.
 
 ```
 class NumArray {
@@ -84,3 +93,6 @@ class NumArray {
  */
 
 ```
+
+**Time Complexity** - O(N) in constructor, and O(1) for each sumRange call
+**Space Complexity** - O(N)
