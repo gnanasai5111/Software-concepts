@@ -62,8 +62,8 @@ class NumArray {
  */
 ```
 
-**Time Complexity** - O(N) in constructor, and O(N) for each sumRange call
-**Space Complexity** - O(N)
+- **Time Complexity** - O(N) in constructor, and O(N) for each sumRange call
+- **Space Complexity** - O(N)
 
 
 ## Prefix sum
@@ -94,5 +94,5 @@ class NumArray {
 
 ```
 
-**Time Complexity** - O(N) in constructor, and O(1) for each sumRange call
-**Space Complexity** - O(N)
+- **Time Complexity** - O(N) in constructor, and O(1) for each sumRange call
+- **Space Complexity** - O(N)
