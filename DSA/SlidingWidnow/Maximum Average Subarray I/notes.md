@@ -50,7 +50,7 @@ class Solution {
 - **Space Complexity** - O(1)
 
 
-## Sliding Window
+## Prefix sum
 
 - Create a prefix sum array sum[] of the same size as nums[].
 - Initialize sum[0] = nums[0].
