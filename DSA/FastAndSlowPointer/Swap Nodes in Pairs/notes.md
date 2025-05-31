@@ -72,45 +72,57 @@ class Solution {
 - **Space Complexity** - O(1)
 
 
-## Fast and Slow Pointer (Floyd’s Cycle Detection approach (also known as Tortoise and Hare))
+## Swapping Node using Previous values
 
-- Checks if list is empty or has only one node — in which case, no cycle
-- Uses two pointers: slow moves one step, fast moves two steps
-- If slow and fast ever meet, a cycle exists and returns true
-- If fast or fast.next becomes null, list ends and has no cycle
+- The function swaps every two adjacent nodes in a singly linked list.
+- A dummy node is created to simplify edge case handling, especially when the head is involved in a swap.
+- dummy.next = head connects the dummy node to the start of the list.
+- prev is initialized to point to the dummy node; it tracks the node before the current pair.
+- first starts at the head and represents the first node in the current pair.
+- In each iteration of the loop, the function checks if there are at least two nodes left to swap.
+- second = first.next identifies the second node in the pair.
+- first.next = second.next skips over second to prepare for the swap.
+- second.next = first completes the swap by pointing second to first.
+- prev.next = second connects the previous part of the list to the newly swapped pair.
+- prev = first moves the prev pointer forward to the last node of the swapped pair.
+- first = first.next moves the first pointer forward to the next node to be processed.
+- The loop continues until no more pairs are left to swap.
+- The function returns dummy.next, which points to the new head of the swapped list.
 
 
 ```
 /**
  * Definition for singly-linked list.
- * class ListNode {
+ * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-public class Solution {
-    public boolean hasCycle(ListNode head) {
-        if(head==null || head.next==null){
-            return false;
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode prev = dummy;
+        ListNode first=head;
+        ListNode second=null;
+        while(first!=null && first.next!=null){
+            second=first.next;
+            first.next=second.next;
+            second.next=first;
+            prev.next=second;
+            prev=first;
+            first=first.next;
         }
-        ListNode slow=head;
-        ListNode fast=head.next;
-        while(fast!=null && fast.next!=null){
-            if(slow==fast){
-                return true;
-            }
-            slow=slow.next;
-            fast=fast.next.next;
-        }
-        return false;
-        
+        return dummy.next;       
     }
 }
 ```
 
 - **Time Complexity** - O(N)
 - **Space Complexity** - O(1)
+
+
+
