@@ -209,3 +209,57 @@ class Solution {
 
 - **Time Complexity** - O(NlogN) 
 - **Space Complexity** - O(N)
+
+## Quick Sort 
+
+- Uses QuickSort algorithm to sort an array in-place
+- partition function chooses the first element as pivot
+- Two pointers i and j traverse the array from left and right respectively
+- Pointer i moves right while elements are less than or equal to pivot
+- Pointer j moves left while elements are greater than pivot
+- When i is less than j, elements at i and j are swapped
+- After the pointers cross, pivot is swapped with element at j to place it correctly
+- partition returns the final pivot index
+- quickSort recursively sorts subarrays before and after the pivot
+- sortArray calls quickSort on the whole array and returns the sorted array
+
+```
+class Solution {
+    public int partition(int l,int r,int nums[]){
+        int pivot=nums[l];
+        int i=l;
+        int j=r;
+        while(i<j){
+            while(nums[i]<=pivot && i<=r-1){
+                i++;
+            }
+            while(nums[j]>pivot && j>=l+1){
+                j--;
+            }
+            if(i<j){
+                int temp=nums[i];
+                nums[i]=nums[j];
+                nums[j]=temp;
+            }
+        }
+        nums[l]=nums[j];
+        nums[j]=pivot;
+        return j;
+    }
+    public void quickSort(int l,int r,int nums[]){
+        if(l<r){
+            int partitionIndex=partition(l,r,nums);
+            quickSort(l,partitionIndex-1,nums);
+            quickSort(partitionIndex+1,r,nums);
+        }
+    }
+    public int[] sortArray(int[] nums) {
+        quickSort(0,nums.length-1,nums);
+        return nums;
+        
+    }
+}
+```
+
+- **Time Complexity** - O(NlogN) 
+- **Space Complexity** - O(1)
