@@ -263,3 +263,126 @@ class Solution {
 
 - **Time Complexity** - O(NlogN) 
 - **Space Complexity** - O(1)
+
+
+##  Heap
+
+- A heap is a special kind of binary tree used mainly for implementing priority queues and heap sort.
+- Its a Complete Binary Tree : All levels are completely filled except possibly the last, which is filled from left to right.
+- Max-Heap: Parent node is greater than or equal to its children.
+- Min-Heap: Parent node is less than or equal to its children.
+
+## Heap Sort insertion based
+
+- This code sorts an array using Heap Sort.
+- A max heap is built using an ArrayList.
+- The insert function adds numbers and maintains the max heap by pushing larger numbers up.
+- The heapify function fixes the heap by pushing smaller numbers down to the right position.
+- After building the heap, the largest number is placed at the end of the array.
+- The top element is swapped with the last, and heapify is used to fix the remaining heap.
+- This continues until the whole array is sorted in ascending order.
+- Sorting happens in the original array, but an ArrayList is used to build the heap.
+
+```
+class Solution {
+    public void swap(ArrayList<Integer> heap,int i, int j){
+        int temp=heap.get(i);
+        heap.set(i,heap.get(j));
+        heap.set(j,temp);
+    }
+    public void insert(ArrayList<Integer> heap,int val){
+        heap.add(val);
+        int index=heap.size()-1;
+        while(index>=0){
+            int parent=(index-1)/2;
+            if(heap.get(index)>heap.get(parent)){
+                swap(heap,index,parent);
+                index=parent;
+            }
+            else{
+                break;
+            }
+        }
+    }
+    public void heapify(ArrayList<Integer> heap,int index, int size){
+        int largest=index;
+        int left=2*index+1;
+        int right=2*index+2;
+       if(left<size && heap.get(largest)<heap.get(left)){
+            largest=left;
+       }
+       if(right<size && heap.get(largest)<heap.get(right)){
+            largest=right;
+       }
+       if(largest!=index){
+            swap(heap,largest,index);
+            heapify(heap,largest,size);
+       }
+    }
+    public int[] sortArray(int[] nums) {
+        ArrayList<Integer> heap=new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            insert(heap,nums[i]);
+        }
+        for(int i=heap.size()-1;i>=0;i--){
+            nums[i]=heap.get(0);
+            heap.set(0,heap.get(i));
+            heapify(heap,0,i);
+        }
+        return nums;
+        
+    }
+}
+```
+- **Time Complexity** - O(NlogN)+O(NlogN) 
+- **Space Complexity** - O(N)
+
+## Heap Sort (In-place / Efficient Version)
+
+- This code sorts an array using the Heap Sort algorithm.
+- heapify() ensures the max-heap property: parent is larger than children.
+- In the first loop, we build a max heap by calling heapify() from bottom non-leaf nodes to the root.
+- The range starts from nums.length - 1 down to 0, but ideally it should start from nums.length / 2 - 1.
+- In the second loop, we repeatedly move the maximum (root at index 0) to the end of the array.
+- After swapping the max element with the last, we reduce the heap size and call heapify() on the root to fix the heap.
+- The swap() method exchanges two elements in the array.
+- This sorts the array in-place without using extra space.
+
+```
+class Solution {
+    public void swap(int nums[],int i, int j){
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+    public void heapify(int nums[],int index,int size){
+        int largest=index;
+        int left=2*index+1;
+        int right=2*index+2;
+       if(left<size && nums[largest]<nums[left]){
+            largest=left;
+       }
+       if(right<size && nums[largest]<nums[right]){
+            largest=right;
+       }
+       if(largest!=index){
+            swap(nums,largest,index);
+            heapify(nums,largest,size);
+       }
+    }
+    public int[] sortArray(int[] nums) {
+        for(int i=nums.length/2-1;i>=0;i--){
+            heapify(nums,i,nums.length);
+        }
+        for(int i=nums.length-1;i>=0;i--){
+            swap(nums, 0, i);
+            heapify(nums,0,i);
+        }
+        return nums;
+        
+    }
+}
+```
+
+- **Time Complexity** - O(NlogN)
+- **Space Complexity** - O(1)
