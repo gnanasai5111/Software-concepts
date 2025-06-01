@@ -150,3 +150,62 @@ class Solution {
 
 - **Time Complexity** - O(n + k) where k=(max - min + 1)
 - **Space Complexity** - O(k)
+
+## Merge Sort 
+
+- Uses Divide and Conquer strategy.
+- Recursively splits the array into halves until single elements remain.
+- Merges the sorted halves back while maintaining order.
+- mergeSort(left, right, nums) recursively sorts subarrays.
+- merge(left, mid, right, nums) merges two sorted subarrays into one.
+- Uses a temporary array merged[] to hold sorted elements during merge.
+- Copies merged results back into the original nums[] array.
+- Ensures stable sort (does not change relative order of equal elements).
+
+```
+class Solution {
+    public void merge(int left, int mid, int right, int[] nums) {
+        int pointer1 = left;
+        int pointer2 = mid + 1;
+        int[] merged = new int[right - left + 1];
+        int index = 0;
+
+        while (pointer1 <= mid && pointer2 <= right) {
+            if (nums[pointer1] <= nums[pointer2]) {
+                merged[index++] = nums[pointer1++];
+            } else {
+                merged[index++] = nums[pointer2++];
+            }
+        }
+
+        while (pointer1 <= mid) {
+            merged[index++] = nums[pointer1++];
+        }
+
+        while (pointer2 <= right) {
+            merged[index++] = nums[pointer2++];
+        }
+
+        for (int i = 0; i < merged.length; i++) {
+            nums[left + i] = merged[i];
+        }
+    }
+
+    public void mergeSort(int left, int right, int[] nums) {
+        if (left >= right) return;
+
+        int mid = left + (right - left) / 2;
+        mergeSort(left, mid, nums);
+        mergeSort(mid + 1, right, nums);
+        merge(left, mid, right, nums);
+    }
+
+    public int[] sortArray(int[] nums) {
+        mergeSort(0, nums.length - 1, nums);
+        return nums;
+    }
+}
+```
+
+- **Time Complexity** - O(NlogN) 
+- **Space Complexity** - O(N)
