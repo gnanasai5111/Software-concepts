@@ -109,22 +109,14 @@ class Solution {
 
 ## Fast and Slow Pointer(Linked list cycle , Flyods Tortoise and hare Algorithm)
 
-Fast - hare 
-slow - tortoise
+- The array can be seen as a linked list where each value points to the next index
+- A duplicate number creates a cycle in this virtual linked list
+- The slow and fast pointers are guaranteed to meet inside the cycle due to the cycle's nature
+- At the point of intersection, the distance equations give: 2 * (p + c - x) = p + 2c - x
+- Solving the equation results in p = x, meaning the distance from start to cycle start equals distance from intersection to cycle start
+- Resetting one pointer to the start and moving both one step at a time ensures they meet at the duplicate (cycle start)
 
-Use a fast and slow pointer. And interate through the array till both fast and slow pointer intersect.
-
-Consider the distance from start to duplicate value is P.And rest of the path from duplicate value is c.
-consider the distance from intersection point to duplicate is x.
-
-so for slow pointer = p+c-x
-        fast pointer=p+2c-x
-    2*slow=fast
-    2*(p+c-x)=p+2c-x
-    by solving you get p=x
-    so that is why we make fast pointer from starting again so that distance between start to duplicate and from intersection to duplicate
-    is same
-
+```
 class Solution {
     public int findDuplicate(int[] nums) {
         int slow=nums[0];
@@ -138,9 +130,11 @@ class Solution {
             slow=nums[slow];
             fast=nums[fast];
         }
-        return slow;      
+        return slow;
+        
     }
 }
+```
 
 **Time complexity** - o(N)
 **Space complexity** - o(1)
