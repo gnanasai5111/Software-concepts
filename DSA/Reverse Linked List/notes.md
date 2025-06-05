@@ -78,7 +78,7 @@ class Solution {
 **Space Complexity** - O(N)
 
 
-## Reverse the Pointer
+## Iterative In-Place Reversal
 
 - The method reverseList reverses a singly linked list in-place and returns the new head of the reversed list.
 - Two pointers are used: prev (initially null) to keep track of the reversed part, and curr (starting at head) to iterate through the original list.
@@ -117,3 +117,40 @@ class Solution {
 
 **Time Complexity** - O(N)
 **Space Complexity** - O(1)
+
+## Recursion
+
+- The method reverseList uses recursion to reverse the linked list and returns the new head.
+- The base case checks if the list is empty (head == null) or has only one node (head.next == null); in either case, it returns head as the reversed list.
+- The function calls itself recursively on the next node (head.next) until it reaches the last node.
+- On the way back (during recursion unwind), it sets head.next.next = head to reverse the link between the current node and the next.
+- Then, it sets head.next = null to break the original forward link and avoid cycles.
+- Finally, it returns newHead, which is the head of the reversed list formed during the recursive calls.
+
+```
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null || head.next==null){
+            return head;
+        }
+        ListNode newHead=reverseList(head.next);
+        head.next.next=head;
+        head.next=null;
+        return newHead;
+
+    }
+}
+```
+
+**Time Complexity** - O(N)
+**Space Complexity** - O(N)
