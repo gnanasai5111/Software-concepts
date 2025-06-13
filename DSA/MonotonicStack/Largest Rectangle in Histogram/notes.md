@@ -62,31 +62,7 @@ class Solution {
 
 ## Monotonic stack 
 
-- Solves the Daily Temperatures problem using a monotonic decreasing stack
-- Iterates the temperatures array from right to left
-- Maintains a stack of indices where temperatures are in decreasing order
-- Pops indices from the stack while the current temperature is greater than or equal to the temperature at the stack's top index
-- If the stack is empty, there is no warmer day ahead, so stores 0
-- If the stack is not empty, stores the difference between the next warmer day's index and the current index
-- Pushes the current index onto the stack after processing
 
-```
-class Solution {
-    public int[] dailyTemperatures(int[] temperatures) {
-        int res[]=new int[temperatures.length];
-        Stack<Integer> st=new Stack<>();
-        for(int i=temperatures.length-1;i>=0;i--){
-            while(!st.isEmpty() && temperatures[i]>=temperatures[st.peek()]){
-                st.pop();
-            }
-            res[i]=st.isEmpty()?0:st.peek()-i;
-            st.push(i);
-        }
-        return res;
-        
-    }
-}
-```
 
 **Time complexity** - O(N)
 **Space Complexity** - O(N)
