@@ -20,6 +20,49 @@ Output: [1]
 - k is in the range [1, the number of unique elements in the array].
 - It is guaranteed that the answer is unique.
 
+## Brute Force
+
+- A HashMap is used to count the frequency of each number in the array.
+- A custom Pair class is defined with two fields: num (the element) and freq (its frequency).
+- Each entry from the map is converted into a Pair object and added to a List.
+- The list of pairs is sorted in descending order based on frequency using a custom comparator.
+- After sorting, the top k elements (most frequent) are taken from the list and stored in the result array.
+- The result array is returned, containing the k most frequent numbers.
+
+```
+class Solution {
+    class Pair {
+        int num;
+        int freq;
+
+        Pair(int num, int freq) {
+            this.num = num;
+            this.freq = freq;
+        }
+    }
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+        }
+        List<Pair> list=new ArrayList<>();
+        for(Integer i:map.keySet()){
+            list.add(new Pair(i,map.get(i)));
+        }
+        list.sort((a, b) -> b.freq - a.freq);
+        int res[]=new int[k];
+        for(int i=0;i<k;i++){
+            res[i]=list.get(i).num;
+        }
+        return res;
+        
+    }
+}
+```
+
+**Time Complexity** - O(NlogN)
+**Space Complexity** - O(N)
+
 
 
 ## Min Heap
