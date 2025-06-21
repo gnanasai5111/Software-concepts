@@ -62,3 +62,40 @@ class Solution {
 
 **Time Complexity** - O(NlogK)
 **Space Complexity** - O(K)
+
+## Counting Sort 
+
+- It first determines the minimum and maximum values in the array to define the range of possible values.
+- An integer array c[] is created to count the frequency of each element within the range [min, max].
+- Each element in nums is mapped to the count array using index nums[i] - min.
+- A reverse traversal is done from the highest possible value (end of count array) to the lowest.
+- While traversing, it subtracts the frequency at each index from remain, which starts at k.
+- When remain becomes 0 or less, the corresponding number (i + min) is the kth largest element.
+
+```
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        int min=nums[0];
+        int max=nums[0];
+        for(int i=0;i<nums.length;i++){
+            min=Math.min(min,nums[i]);
+            max=Math.max(max,nums[i]);
+        }
+        int c[]=new int[max-min+1];
+        for(int i=0;i<nums.length;i++){
+            c[nums[i]-min]++;
+        }
+        int remain=k;
+        for(int i=c.length-1;i>=0;i--){
+            remain-=c[i];
+            if(remain<=0){
+                return i+min;
+            }
+        }
+        return -1;
+    }
+}
+```
+
+**Time Complexity** - O(N+M)
+**Space Complexity** - O(M)
