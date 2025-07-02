@@ -136,7 +136,9 @@ public List<Integer> inorderTraversal(TreeNode root) {
 - Pushing right before left ensures the left child is processed first due to the LIFO nature of the stack.
 - This results in visiting nodes in the correct preorder sequence: root → left → right.
 - Once the stack is empty, all nodes have been visited and the result list is returned.
-  
+
+
+## Postorder Traversal (Iterative)  
 ```
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
@@ -157,6 +159,45 @@ class Solution {
             }
         }
         return res;
+    }
+}
+```
+
+
+- Uses a stack to simulate the recursive postorder traversal (left, right, root).
+- Maintains a pointer current to traverse nodes and a temp variable to handle right subtree logic.
+- Starts with the root node and goes as far left as possible, pushing nodes onto the stack.
+- Once current is null, it checks the right child of the node at the top of the stack.
+- If the right child is null, it means both left and right are processed, so the node is popped and added to result.
+- After popping, it checks if the node just popped was the right child of the new top. If yes, it means the right subtree was also completed, so it continues popping and adding to the result.
+- If the right child exists and is not yet processed, it sets current to that right child to process it next.
+- This ensures nodes are only added to the result after both left and right children are handled.
+
+```
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+            TreeNode temp=stack.peek().right;
+            if(temp==null){
+                temp=stack.pop();
+                result.add(temp.val);
+                while(!stack.isEmpty() && stack.peek().right==temp){
+                    temp=stack.pop();
+                    result.add(temp.val);
+                }
+            }
+            else{
+                current=temp;
+            }
+        }
+        return result;
     }
 }
 ```
