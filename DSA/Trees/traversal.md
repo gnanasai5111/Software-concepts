@@ -137,8 +137,6 @@ public List<Integer> inorderTraversal(TreeNode root) {
 - This results in visiting nodes in the correct preorder sequence: root → left → right.
 - Once the stack is empty, all nodes have been visited and the result list is returned.
 
-
-## Postorder Traversal (Iterative)  
 ```
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
@@ -163,6 +161,7 @@ class Solution {
 }
 ```
 
+## Postorder Traversal (Iterative)  
 
 - Uses a stack to simulate the recursive postorder traversal (left, right, root).
 - Maintains a pointer current to traverse nodes and a temp variable to handle right subtree logic.
@@ -204,3 +203,88 @@ class Solution {
 
 **Time Complexity** - o(N)
 **Space Complexity** - o(H)
+
+## Levelorder Traversal (Iterative)  
+
+- This algorithm performs a level-by-level traversal of a binary tree using a queue.
+- A result list res is used to store values level by level in the form of nested lists.
+- A queue (q) is initialized and the root node is added to start the traversal.
+- The loop runs as long as the queue is not empty.
+- At each level, the number of nodes currently in the queue is stored in size.
+- A temporary list inner is created to hold node values for the current level.
+- A for-loop runs size times to process all nodes at the current level.
+- Each node is dequeued using poll() and its value is added to inner.
+- If the dequeued node has a left child, it is enqueued.
+- If it has a right child, it is also enqueued.
+- After processing one level, inner is added to the result list res.
+- The process repeats for all levels until the queue is empty.
+- Finally, the result list res is returned, containing values grouped by levels.
+
+```
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res=new ArrayList<>();
+        Queue<TreeNode> q=new LinkedList<>();
+        if(root==null){
+            return res;
+        }
+        q.add(root);
+        while(!q.isEmpty()){
+            int size=q.size();
+            ArrayList<Integer> inner=new ArrayList<>();
+            for(int i=0;i<size;i++){
+                TreeNode node=q.poll();
+                inner.add(node.val);
+                if(node.left!=null){
+                    q.add(node.left);
+                }
+                if(node.right!=null){
+                    q.add(node.right);
+                }
+            }
+            if(inner.size()>0){
+                res.add(inner);
+            }
+        }
+        return res;
+        
+    }
+}
+```
+
+## Levelorder Traversal (Recursive)  
+
+- This approach performs level order traversal using recursion instead of a queue.
+- It tracks the current level of the tree during the recursion.
+- If the current level does not exist in the result list, it adds a new list for that level.
+- It adds the node's value to the list corresponding to the current level.
+- It recursively calls the left and right child with level incremented by 1.
+- The result list will contain one list per level, with node values in level order.
+- The recursion ensures left-to-right order is preserved at each level.
+- Efficient for balanced trees, but may risk stack overflow for very deep trees.
+
+```
+class Solution {
+    public void recursiveLevelOrderTraversal(TreeNode root,List<List<Integer>> res,int level){
+        if(root==null){
+            return;
+        }
+        if(level==res.size()){
+            res.add(new ArrayList<>());
+        }
+        res.get(level).add(root.val);
+        recursiveLevelOrderTraversal(root.left,res,level+1);
+        recursiveLevelOrderTraversal(root.right,res,level+1);
+
+    }
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res=new ArrayList<>();
+        recursiveLevelOrderTraversal(root,res,0);
+        return res;
+        
+    }
+}
+```
+
+**Time Complexity** - o(N)
+**Space Complexity** - o(N)
