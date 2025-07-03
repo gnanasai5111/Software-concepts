@@ -288,3 +288,100 @@ class Solution {
 
 **Time Complexity** - o(N)
 **Space Complexity** - o(N)
+
+## Zig-Zag Levelorder Traversal (Iterative) 
+
+- Uses a queue to perform level-order traversal of the binary tree
+- Initializes a result list to store values of each level
+- Maintains a boolean isReverse to control zigzag direction
+- Adds the root node to the queue as the starting point
+- For each level, determines the number of nodes to process
+- Initializes a list to store current level node values
+- For each node in the level, dequeues it from the queue
+- Adds the node value to the list from front or back based on isReverse
+- Adds the node’s left and right children to the queue if present
+- After processing a level, toggles the isReverse flag
+- Appends the current level list to the final result list
+- Continues this until the queue is empty
+- Returns the final result list with zigzag level order
+
+```
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res=new ArrayList<>();
+        Queue<TreeNode> q=new LinkedList<>();
+        if(root==null){
+            return res;
+        }
+        q.add(root);
+        boolean isReverse=false;
+        while(!q.isEmpty()){
+            int size=q.size();
+            ArrayList<Integer> inner=new ArrayList<>();
+            for(int i=0;i<size;i++){
+                TreeNode node=q.poll();
+                if(!isReverse){
+                    inner.add(node.val);
+                }
+                else{
+                    inner.addFirst(node.val);
+                }
+                if(node.left!=null){
+                    q.add(node.left);
+                }
+                if(node.right!=null){
+                    q.add(node.right);
+                }
+
+            }
+            res.add(inner);
+            isReverse=!isReverse;
+        }
+        return res;
+        
+    }
+}
+```
+## Zig-Zag Levelorder Traversal (Recursive) 
+
+- Uses DFS-style recursion to simulate level-order traversal with zigzag ordering.
+- A helper function recursiveZigzagTraversal is used to build the result level by level.
+- Takes the current node, result list, current level, and a boolean flag isReverse as parameters.
+- If the current level is not yet in the result list, a new list is added for that level.
+- If isReverse is false, appends the value to the end of the level list.
+- If isReverse is true, prepends the value to the beginning using addFirst() (requires LinkedList, not ArrayList).
+- Recursively calls for the left and right children with the level incremented by one.
+- Alternates the isReverse flag in each recursive call to toggle the zigzag direction.
+- Starts recursion with level 0 and isReverse = false.
+- Final result is a list of lists representing zigzag level order traversal.
+
+```
+class Solution {
+    public void recursiveZigzagTraversal(TreeNode root,List<List<Integer>> res,int level,boolean isReverse){
+        if(root==null){
+            return;
+        }
+        if(res.size()==level){
+            res.add(new ArrayList());
+        }
+        if(!isReverse){
+            res.get(level).add(root.val);
+        }
+        else{
+            res.get(level).addFirst(root.val);
+        }
+        
+        recursiveZigzagTraversal(root.left,res,level+1,!isReverse);
+        recursiveZigzagTraversal(root.right,res,level+1,!isReverse);
+    }
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res=new ArrayList<>();
+        recursiveZigzagTraversal(root,res,0,false);
+        return res;
+        
+    }
+}
+```
+
+**Time Complexity** - o(N)
+**Space Complexity** - o(N)
