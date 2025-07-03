@@ -1,10 +1,12 @@
-## Binary Tree Traversal - Recursive (Java)
+## Binary Tree Traversals
 
-This note includes implementations of all three **depth-first traversals**:
+This note includes implementations of all common binary tree traversals:
 
 *  Inorder (Left → Root → Right)
 *  Preorder (Root → Left → Right)
 *  Postorder (Left → Right → Root)
+*  Level Order (Top → Bottom → Left to Right)
+*  Zigzag Level Order (Alternating Left → Right and Right → Left per level)
 
 
 ## TreeNode Class
