@@ -5,9 +5,6 @@
 ## SQL(Structured Query Language)
 - SQL is a standard programming language for storing, manipulating and retrieving data in databases.
 
-
-## MYSQL COMMANDS
-
 ### CREATE DATABASE
 - The CREATE DATABASE is used to create a new database.
 ```
