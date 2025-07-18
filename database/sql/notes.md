@@ -18,7 +18,7 @@ DROP DATABASE databasename;
 ```
 
 ### SHOW DATABASES
-- The SHOW DATABASES is used view all the databases
+- The SHOW DATABASES is used to List all available databases.
 ```
 SHOW DATABASES;
 ```
@@ -30,5 +30,31 @@ BACKUP DATABASE databasename to DISK='filepath'
 - A differential back up only backs up the parts of the database that have changed since the last full database backup.
 ```
 BACKUP DATABASE databasename to DISK='filepath' WITH DIFFERENTIAL
+```
+
+### CREATE TABLE
+- The CREATE TABLE statement is used to create a new table in a database.
+```
+CREATE TABLE tablename (
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+   ....
+);
+```
+**Example**
+```
+CREATE TABLE Employees (
+    EmployeeID,
+    Name VARCHAR(100),
+    Email VARCHAR(150),
+    Gender ENUM('Male', 'Female', 'Other'),
+    IsActive BOOLEAN,
+    Salary DECIMAL(10, 2),
+    JoinDate DATE,
+    LastLogin DATETIME,
+    ProfileImage BLOB,
+    Metadata JSON
+);
 ```
 
