@@ -61,12 +61,37 @@ CREATE TABLE Employees (
 ### DROP TABLE 
 -  It is used to delete the table from the database
 ```
-DROP TABLE table_name;
+DROP TABLE tablename;
 ```
 
 ### TRUNCATE TABLE
 - It is used to delete the data inside a table, but not the table itself.
 ```
-TRUNCATE TABLE table_name;
+TRUNCATE TABLE tablename;
 ```
+
+### ALTER TABLE
+- It is is used to add, delete, or modify columns in an existing table.
+
+**Add Column**
+```
+ALTER TABLE tablename
+ADD columnname datatype;
+```
+**Remove Column**
+```
+ALTER TABLE tablename
+DROP COLUMN columnname;
+```
+**Rename Column**
+```
+ALTER TABLE tablename
+RENAME COLUMN old_name to new_name;
+```
+**Change Datatype**
+```
+ALTER TABLE table_name
+MODIFY COLUMN column_name datatype;
+```
+
 
