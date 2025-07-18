@@ -58,3 +58,15 @@ CREATE TABLE Employees (
 );
 ```
 
+### DROP TABLE 
+-  It is used to delete the table from the database
+```
+DROP TABLE table_name;
+```
+
+### TRUNCATE TABLE
+- It is used to delete the data inside a table, but not the table itself.
+```
+TRUNCATE TABLE table_name;
+```
+
